@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Laptop Lenovo IdeaPad 3",
+    "price": 750,
+    "category": "Electronics",
+    "stock": 15,
+    "description": "Laptop con procesador Ryzen 5, 8GB RAM y 512GB SSD ideal para trabajo y estudio.",
+    "image": "https://example.com/images/lenovo-ideapad3.jpg"
+  },
+  {
+    "name": "Smartphone Samsung Galaxy A54",
+    "price": 420,
+    "category": "Electronics",
+    "stock": 25,
+    "description": "Teléfono inteligente con pantalla AMOLED de 6.4 pulgadas, 128GB de almacenamiento.",
+    "image": "https://example.com/images/samsung-a54.jpg"
+  },
+  {
+    "name": "Auriculares Bluetooth Sony WH-CH520",
+    "price": 80,
+    "category": "Accessories",
+    "stock": 40,
+    "description": "Auriculares inalámbricos con cancelación de ruido y batería de larga duración.",
+    "image": "https://example.com/images/sony-whch520.jpg"
+  },
+  {
+    "name": "Mouse Logitech MX Master 3",
+    "price": 120,
+    "category": "Accessories",
+    "stock": 30,
+    "description": "Mouse ergonómico inalámbrico con alta precisión y múltiples botones programables.",
+    "image": "https://example.com/images/logitech-mxmaster3.jpg"
+  },
+  {
+    "name": "Teclado Mecánico Redragon K552",
+    "price": 65,
+    "category": "Accessories",
+    "stock": 50,
+    "description": "Teclado mecánico compacto con retroiluminación LED y switches duraderos.",
+    "image": "https://example.com/images/redragon-k552.jpg"
+  },
+  {
+    "name": "Monitor LG UltraWide 29 pulgadas",
+    "price": 300,
+    "category": "Electronics",
+    "stock": 20,
+    "description": "Monitor UltraWide Full HD ideal para productividad y entretenimiento.",
+    "image": "https://example.com/images/lg-ultrawide29.jpg"
+  },
+  {
+    "name": "Silla Gamer Cougar Armor One",
+    "price": 250,
+    "category": "Furniture",
+    "stock": 10,
+    "description": "Silla gamer ergonómica con soporte lumbar y reposabrazos ajustables.",
+    "image": "https://example.com/images/cougar-armor.jpg"
+  },
+  {
+    "name": "Disco SSD Samsung 1TB",
+    "price": 140,
+    "category": "Electronics",
+    "stock": 35,
+    "description": "Unidad de estado sólido con alta velocidad de lectura y escritura.",
+    "image": "https://example.com/images/samsung-ssd1tb.jpg"
+  }
+]

@@ -1,0 +1,21 @@
+
+###
+
+GET http://localhost:3007/api/producto/69aa72b2c7381a18155d03b6
+
+###
+
+POST http://localhost:3007/api/producto
+Content-Type: application/json
+
+{
+  "name": "Celular Xiaomi 15c",
+  "price": 430,
+  "category": "Electronics",
+  "stock": 10,
+  "description": "Celular con capacidad de procesamiento alto, 8GB RAM y 512GB ideal para trabajo y juegos.",
+  "rating": {
+    "rate": 4.7,
+    "count": 10
+  } 
+}
