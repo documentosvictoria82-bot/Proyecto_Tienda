@@ -59,7 +59,6 @@ const ObtenerPorID = async (req, res) => {
 const CrearUnProducto = async (req, res) => {
 
     try {
-
          const nuevoProducto= new Product(req.body)
          console.log(nuevoProducto)
         await nuevoProducto.save();
@@ -96,8 +95,52 @@ const CrearUnProducto = async (req, res) => {
 
 }
 
+// Modificar un producto
+const ModificarProducto = async (req, res) => {
+    try {
+        const { id } = req.params; // Obtenemos el id de la URL
+        const datosActualizados = req.body; // Obtenemos los nuevos datos
+
+        // Buscamos y actualizamos
+        const productoActualizado = await Product.findByIdAndUpdate(id, datosActualizados, { new: true });
+
+        if (!productoActualizado) {
+            return res.status(404).json({ mensaje: "Producto no encontrado" });
+        }
+
+        res.status(200).json({ 
+            mensaje: "Producto actualizado con éxito", 
+            producto: productoActualizado 
+        });
+    } catch (error) {
+        console.error("Error al modificar producto:", error);
+        res.status(500).json({ mensaje: "Error al modificar el producto", error: error.message });
+    }
+};
+
+// Eliminar un producto
+const EliminarProducto = async (req, res) => {
+    try {
+        const { id } = req.params; // Obtenemos el id de la URL
+
+        // Buscamos y eliminamos
+        const productoEliminado = await Product.findByIdAndDelete(id);
+
+        if (!productoEliminado) {
+            return res.status(404).json({ mensaje: "Producto no encontrado" });
+        }
+
+        res.status(200).json({ mensaje: "Producto eliminado con éxito", producto: productoEliminado });
+    } catch (error) {
+        console.error("Error al eliminar producto:", error);
+        res.status(500).json({ mensaje: "Error al eliminar el producto", error: error.message });
+    }
+};
+
 module.exports = {
     ObtenerTodo,
     ObtenerPorID,
-    CrearUnProducto
+    CrearUnProducto,
+    ModificarProducto,
+    EliminarProducto
 }
