@@ -27,4 +27,6 @@ localStorage.setItem("token", data.token)
 
 alert("Login correcto")
 
+window.location.href = "FuncionesProveedor.html";
+
 })

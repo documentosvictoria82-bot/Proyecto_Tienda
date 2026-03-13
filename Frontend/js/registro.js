@@ -32,6 +32,8 @@ const result = await response.json()
 
 console.log(result)
 
-alert(result.message)
-
+alert(result.message); 
+    if (response.ok) {
+    window.location.href = "login.html";
+    }
 })

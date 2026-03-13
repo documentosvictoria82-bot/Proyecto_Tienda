@@ -1,0 +1,64 @@
+/* Centrar el login en toda la pantalla */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* El contenedor principal */
+.login-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Títulos y texto */
+.login-container h2 {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* Estilo de los inputs (igual que en tu formulario de gestión) */
+#loginForm input {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+}
+
+/* Botón de login */
+#loginForm button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#loginForm button:hover {
+    background-color: #0056b3;
+}
+
+/* Link de registro */
+.login-container p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}

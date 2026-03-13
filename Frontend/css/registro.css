@@ -1,0 +1,70 @@
+/* --- ESTILO GLOBAL PARA PÁGINAS DE ACCESO (LOGIN Y REGISTRO) --- */
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;    /* Centra verticalmente */
+    min-height: 100vh;
+    background-color: #f4f7f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* Estilo unificado para inputs en ambos formularios */
+.login-container input {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Crucial para que el padding no desborde */
+}
+
+/* Estilo unificado para botones */
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #27ae60; /* Verde para registro/éxito */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.login-container button:hover {
+    background-color: #219150;
+    transform: translateY(-2px);
+}
+
+/* Enlaces (¿Ya tienes cuenta? / ¿Regístrate?) */
+.login-container p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.login-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
