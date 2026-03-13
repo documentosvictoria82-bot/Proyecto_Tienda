@@ -11,7 +11,7 @@ const usuarioRuta = require('./src/rutas/usuariosRutas')
 server.use(cors());
 
 
-//const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
 conectar()
 
 server.use(express.json());
@@ -33,7 +33,7 @@ res.send('API TIENDA')
     
 server.use('/api', ruta)
 server.use('/api', usuarioRuta)
-// server.listen(PORT, ()=>{
-//     console.log(`servidor corriendo en http://localhost:${PORT}`);
-// })
+ server.listen(PORT, ()=>{
+     console.log(`servidor corriendo en http://localhost:${PORT}`);
+ })
 module.exports = server;
