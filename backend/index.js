@@ -5,9 +5,10 @@ const dotenv = require('dotenv')
 dotenv.config()
 const ruta = require('./src/rutas/ProductoRutas')
 const {conectar} = require('./src/config/indexconf')
-
+const cors = require('cors');
 const usuarioRuta = require('./src/rutas/usuariosRutas')
 
+server.use(cors());
 
 
 //const PORT = process.env.PORT || 3000
