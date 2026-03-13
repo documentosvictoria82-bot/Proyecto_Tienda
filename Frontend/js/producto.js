@@ -1,4 +1,4 @@
-const API = "http://localhost:3007/api/producto"
+const API =  "https://proyecto-tienda-rho.vercel.app/api/producto"
 
 async function obtenerProductos(){
 
