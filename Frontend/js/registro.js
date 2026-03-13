@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/api/usuarios/register"
+const API = "http://localhost:3007/api/usuarios/register"
 
 const form = document.getElementById("registerForm")
 
