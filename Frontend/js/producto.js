@@ -1,21 +1,29 @@
-const API =  "https://proyecto-tienda-rho.vercel.app/api/producto"
+const API = "http://localhost:3000/api/producto"
 
 async function obtenerProductos(){
 
     try{
+
         const response = await fetch(API)
-        const productos = await response.json()
-        mostrarProductos(productos)
+
+        const data = await response.json()
+
+        mostrarProductos(data)
 
     }catch(error){
-        console.log(error)
+
+        console.log("Error:", error)
+
     }
 
 }
 
 function mostrarProductos(productos){
+
     const contenedor = document.getElementById("productos")
+
     contenedor.innerHTML = ""
+
     productos.forEach(producto => {
 
         const card = document.createElement("div")
@@ -24,8 +32,8 @@ function mostrarProductos(productos){
         <h3>${producto.name}</h3>
         <p>${producto.description}</p>
         <p>Precio: $${producto.price}</p>
-        <p>Stock: ${producto.stock}</p>
         `
+
         contenedor.appendChild(card)
 
     })

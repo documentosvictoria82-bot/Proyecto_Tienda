@@ -1,4 +1,4 @@
-const API = "https://proyecto-tienda-rho.vercel.app/api/register"
+const API = "http://localhost:3000/api/usuarios/register"
 
 const form = document.getElementById("registerForm")
 

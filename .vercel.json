@@ -10,7 +10,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "Frontend/index.html"
+            "dest": "Frontend/pages/index.html"
         }
     ]
 }
