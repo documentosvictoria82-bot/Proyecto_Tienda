@@ -5,7 +5,7 @@ config()
 
 const conectar = async () => {
     try {
-
+console.log("Intentando conectar a:", process.env.MONGOURL);
         await mongoose.connect(process.env.MONGOURL)
 
         console.log("Conexión a la base de datos exitosa")
