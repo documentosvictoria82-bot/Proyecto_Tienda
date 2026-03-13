@@ -2,49 +2,22 @@ const mongoose = require("mongoose")
 
 const productSchema = new mongoose.Schema({
 
-    name: {
-        type: String,
-        required: true
-    },
-
-    description: {
-        type: String,
-        required: true
-    },
-
-    price: {
-        type: Number,
-        required: true
-    },
-
-    stock: {
-        type: Number,
-        required: true
-    },
-
-    category: {
-        type: String,
-        required: true
-    },
+    name: String,
+    description: String,
+    price: Number,
+    stock: Number,
+    category: String,
 
     rating: {
-        rate: {
-            type: Number,
-         
-        },
-        count: {
-            type: Number,
-                   }
+        rate: Number,
+        count: Number
     },
 
-    images: [{
-        type: String
-    }]
+    image: String
 
-}, {
+},{
     timestamps: true
 })
 
-const Product = mongoose.model("Product", productSchema)
-
-module.exports = Product
+// FORZAMOS el nombre de la colección
+module.exports = mongoose.model("Product", productSchema, "productos")
