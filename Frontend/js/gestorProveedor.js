@@ -14,10 +14,12 @@ async function cargarProductos() {
         
         // Botones de acción
         const btnEliminar = document.createElement("button");
+        btnEliminar.className = "btn-eliminar";
         btnEliminar.innerText = "Eliminar";
         btnEliminar.onclick = () => eliminarProducto(producto._id);
         
         const btnModificar = document.createElement("button");
+        btnModificar.className = "btn-modificar";
         btnModificar.innerText = "Modificar";
         btnModificar.onclick = () => prepararEdicion(producto);
 
