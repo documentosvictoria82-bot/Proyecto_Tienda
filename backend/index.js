@@ -35,4 +35,4 @@ server.use('/api', usuarioRuta)
 // server.listen(PORT, ()=>{
 //     console.log(`servidor corriendo en http://localhost:${PORT}`);
 // })
-export default server;
+module.exports = server;
