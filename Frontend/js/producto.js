@@ -1,4 +1,4 @@
-const API = "http://localhost:3007/api/producto"
+const API = "http://localhost:3007/api/productos"
 
 async function obtenerProductos(){
 

@@ -6,12 +6,11 @@ const { verificarToken } = require('../middleware');
 
 
 
-ruta.get('/producto', ObtenerTodo)
-ruta.get('/producto/:id', ObtenerPorID)
-ruta.post('/producto', upload.single('imagen'), CrearUnProducto)
+ruta.get('/productos', ObtenerTodo)
+ruta.get('/productos/:id', ObtenerPorID)
+ruta.post('/productos', upload.single('imagen'), CrearUnProducto)
 
-// Ejemplo de cómo deberían verse tus rutas protegidas
-ruta.post("/add", verificarToken, CrearUnProducto);
+
 ruta.put("/update", verificarToken,  ModificarProducto);
 ruta.delete("/delete/:id", verificarToken, EliminarProducto);
 

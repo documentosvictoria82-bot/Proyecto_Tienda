@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
-const { config } = require("dotenv")
+// const { config } = require("dotenv")
 
-config()
+//config()
 
 const conectar = async () => {
     try {
