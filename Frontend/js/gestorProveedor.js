@@ -1,6 +1,16 @@
+const rolActual = localStorage.getItem("role");
+
+if (rolActual !== 'admin') {
+    alert("Acceso denegado: No tienes permisos de administrador.");
+    window.location.href = "login.html"; // Lo regresamos al login
+}
+
+
 const form = document.getElementById("formProducto");
 const lista = document.getElementById("listaProductos");
 let productoEditandoId = null; // Esta variable "recuerda" si estamos editando
+
+
 
 // 1. CARGAR PRODUCTOS AL ABRIR LA PÁGINA
 async function cargarProductos() {

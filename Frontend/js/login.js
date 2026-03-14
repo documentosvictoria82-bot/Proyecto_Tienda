@@ -23,10 +23,20 @@ body: JSON.stringify({email,password})
 
 const data = await response.json()
 
-localStorage.setItem("token", data.token)
+if (response.ok) {
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("role", data.role); 
 
-alert("Login correcto")
+    alert("Login correcto");
 
-window.location.href = "FuncionesProveedor.html";
+    // Redirección basada en rol
+    if (data.role === 'admin') {
+        window.location.href = "FuncionesProveedor.html";
+    } else {
+        window.location.href = "tienda.html";
+    }
+} else {
+    alert(data.error);
+}
 
 })

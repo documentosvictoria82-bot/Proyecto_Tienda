@@ -27,7 +27,8 @@ const register = async (req, res) => {
         const newUser = new User({
             usuario,
             email,
-            password: passwordHash
+            password: passwordHash,
+            role: 'user'
         })
 
         const savedUser = await newUser.save()
@@ -91,7 +92,9 @@ const login = async (req, res) => {
 
         res.status(200).json({
             message: "Login exitoso",
-            token
+            token,
+            role: user.role 
+        
         })
 
     } catch (error) {
