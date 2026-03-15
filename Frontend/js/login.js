@@ -31,9 +31,9 @@ if (response.ok) {
 
     // Redirección basada en rol
     if (data.role === 'admin') {
-        window.location.href = "FuncionesProveedor.html";
+        window.location.href = "../pages/FuncionesProveedor.html";
     } else {
-        window.location.href = "../index.html";
+        window.location.href = "../pages/index.html";
     }
 } else {
     alert(data.error);

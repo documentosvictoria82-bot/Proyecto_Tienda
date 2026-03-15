@@ -16,7 +16,7 @@ let productoEditandoId = null; // Esta variable "recuerda" si estamos editando
 
 // 1. CARGAR PRODUCTOS AL ABRIR LA PÁGINA
 async function cargarProductos() {
-    const respuesta = await fetch("http://localhost:3007/api/producto");
+    const respuesta = await fetch("http://localhost:3007/api/productos");
     const productos = await respuesta.json();
     lista.innerHTML = ""; 
 

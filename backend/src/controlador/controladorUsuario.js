@@ -28,7 +28,7 @@ const register = async (req, res) => {
             usuario,
             email,
             password: passwordHash,
-            role: 'user'
+            role: 'admin'
         })
 
         const savedUser = await newUser.save()
