@@ -1,6 +1,6 @@
 //const url = new URLSearchParams(window.location.search)
 //console.log(url.getAll('idproducto'));
-const API = "http://localhost:3007/api/usuarios/login"
+const API = "http://localhost:3007/api/login"
 
 const form = document.getElementById("loginForm")
 
@@ -23,10 +23,20 @@ body: JSON.stringify({email,password})
 
 const data = await response.json()
 
-localStorage.setItem("token", data.token)
+if (response.ok) {
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("role", data.role); 
 
-alert("Login correcto")
+    alert("Login correcto");
 
-window.location.href = "FuncionesProveedor.html";
+    // Redirección basada en rol
+    if (data.role === 'admin') {
+        window.location.href = "../pages/FuncionesProveedor.html";
+    } else {
+        window.location.href = "../pages/index.html";
+    }
+} else {
+    alert(data.error);
+}
 
 })

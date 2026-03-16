@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
-const { config } = require("dotenv")
+// const { config } = require("dotenv")
 
-config()
+//config()
 
 const conectar = async () => {
     try {
@@ -16,5 +16,13 @@ console.log("Intentando conectar a:", process.env.MONGOURL);
 
     }
 }
+const desconectar = async () => {
+    try {
+        await mongoose.disconnect();
+        console.log("Desconexión de la base de datos exitosa");
+    } catch (error) {
+        console.log("Error al intentar desconectar", error);
+    }    
+}
 
-module.exports = { conectar }
+module.exports = { conectar, desconectar }

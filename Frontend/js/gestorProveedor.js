@@ -2,6 +2,16 @@
 // ELEMENTOS DEL DOM
 // =============================
 
+const rolActual = localStorage.getItem("role");
+
+console.log("El rol detectado es:", rolActual); // Esto te ayudará a ver el error en la consola
+
+if (!rolActual || rolActual.toLowerCase() !== 'admin') {
+    alert("Acceso denegado: No tienes permisos de administrador.");
+    window.location.href = "login.html";
+}
+
+
 const form = document.getElementById("formProducto");
 const lista = document.getElementById("listaProductos");
 

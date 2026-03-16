@@ -1,4 +1,4 @@
-const API = "http://localhost:3007/api/usuarios/register"
+const API = "http://localhost:3007/api/register"
 
 const form = document.getElementById("registerForm")
 
@@ -34,6 +34,6 @@ console.log(result)
 
 alert(result.message); 
     if (response.ok) {
-    window.location.href = "login.html";
+    window.location.href = "../pages/login.html";
     }
 })
