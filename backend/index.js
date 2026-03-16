@@ -24,7 +24,15 @@ server.use('/api', ruta)
 server.use('/api', usuarioRuta)
  server.listen(PORT, ()=>{
      console.log(`servidor corriendo en http://localhost:${PORT}`);
-
-     
  })
+     // Importas la función desde donde la tengas (ej. indexconf.js)
+const { desconectar } = require('./src/config/indexconf'); 
+
+// Escuchar cuando presionas Ctrl + C en la terminal
+process.on('SIGINT', async () => {
+    await desconectar();
+    console.log("Servidor cerrado correctamente.");
+    process.exit(0);
+});
+
 module.exports = server;
