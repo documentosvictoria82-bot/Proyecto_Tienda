@@ -14,7 +14,75 @@ let todosLosProductos = []
 // carrito guardado en el navegador
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []
 
+// =============================
+// ⭐ GENERAR ESTRELLAS
+// =============================
+function generarEstrellas(rating){
 
+let estrellas = ""
+const redondeado = Math.round(rating)
+
+for(let i = 1; i <= 5; i++){
+
+if(i <= redondeado){
+estrellas += "⭐"
+}else{
+estrellas += "☆"
+}
+
+}
+
+return estrellas
+
+}
+
+function generarEstrellasInteractivo(idProducto, ratingActual){
+
+let estrellas = ""
+
+const rating = Math.round(ratingActual)
+
+for(let i = 1; i <= 5; i++){
+
+const activa = i <= rating ? "estrella-activa" : ""
+
+estrellas += `
+<span 
+class="estrella ${activa}" 
+onclick="calificarProducto('${idProducto}',${i})">
+★
+</span>
+`
+
+}
+
+return estrellas
+
+}
+
+async function calificarProducto(id, valor){
+
+try{
+
+// enviar calificación al backend
+await fetch(`${API}/${id}/rating`,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify({rating:valor})
+})
+
+// volver a cargar productos para actualizar estrellas
+obtenerProductos()
+
+}catch(error){
+
+console.log("Error calificando producto:", error)
+
+}
+
+}
 
 // =============================
 // 1️⃣ OBTENER PRODUCTOS DESDE EL BACKEND
@@ -45,6 +113,7 @@ console.log("Error cargando productos:", error)
 
 
 
+
 // =============================
 // 2️⃣ MOSTRAR PRODUCTOS EN LA TIENDA
 // =============================
@@ -60,7 +129,7 @@ contenedor.innerHTML=""
 productos.forEach(producto=>{
 
 // mostrar estrellas de rating
-const estrellas = "⭐".repeat(Math.round(producto.rating?.rate || 0))
+const estrellas = generarEstrellas(producto.rating?.rate || 0)
 
 // obtener imagen
 const imagen = producto.image
@@ -86,7 +155,11 @@ card.innerHTML=`
 
 <p class="precio">$${producto.price}</p>
 
-<p class="rating">${estrellas}</p>
+<div class="rating">
+
+${generarEstrellasInteractivo(producto._id, producto.rating?.rate || 0)}
+
+</div>
 
 <p class="stock">Stock: ${producto.stock}</p>
 
@@ -168,11 +241,13 @@ mostrarProductos(filtrados)
 // 4️⃣ FILTRO POR CATEGORÍAS
 // =============================
 
+document.addEventListener("DOMContentLoaded", () => {
+
 const botonesCategorias = document.querySelectorAll(".categoria")
 
-botonesCategorias.forEach(btn=>{
+botonesCategorias.forEach(btn => {
 
-btn.addEventListener("click",()=>{
+btn.addEventListener("click", () => {
 
 const categoria = btn.dataset.cat
 
@@ -183,8 +258,10 @@ mostrarProductos(todosLosProductos)
 
 }else{
 
-// filtrar por categoría
-const filtrados = todosLosProductos.filter(p=>p.category === categoria)
+// filtrar por categoría (ignora mayúsculas)
+const filtrados = todosLosProductos.filter(p => 
+p.category && p.category.toLowerCase() === categoria.toLowerCase()
+)
 
 mostrarProductos(filtrados)
 
@@ -194,6 +271,7 @@ mostrarProductos(filtrados)
 
 })
 
+})
 
 
 // =============================

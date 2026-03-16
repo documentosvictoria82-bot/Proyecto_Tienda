@@ -6,7 +6,8 @@ const {
     ObtenerPorID, 
     CrearUnProducto, 
     ModificarProducto, 
-    EliminarProducto 
+    EliminarProducto,
+    calificarProducto
 } = require('../controlador/ProductoControler')
 
 const upload = require('../../Utilidades/multer')
@@ -26,6 +27,7 @@ ruta.put('/productos/update/:id', upload.single('imagen'), ModificarProducto)
 ruta.get('/productos', ObtenerTodo)
 ruta.get('/productos/:id', ObtenerPorID)
 ruta.post('/productos', upload.single('imagen'), CrearUnProducto)
+ruta.post("/productos/:id/rating", calificarProducto)
 
 
 //ruta.put("/update", verificarToken,  ModificarProducto);

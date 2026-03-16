@@ -8,10 +8,16 @@ const productSchema = new mongoose.Schema({
     stock: Number,
     category: String,
 
-    rating: {
-        rate: Number,
-        count: Number
+   rating: {
+    rate: {
+        type: Number,
+        default: 0
     },
+    count: {
+        type: Number,
+        default: 0
+    }
+},
 
     image: String
 

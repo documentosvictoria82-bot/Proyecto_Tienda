@@ -90,6 +90,47 @@ const CrearUnProducto = async (req, res) => {
 
 };
 
+const calificarProducto = async (req, res) => {
+
+try{
+
+const { id } = req.params
+const { rating } = req.body
+
+const producto = await Product.findById(id)
+
+if(!producto){
+return res.status(404).json({mensaje:"Producto no encontrado"})
+}
+
+// si no existe rating lo creamos
+if(!producto.rating){
+producto.rating = { rate:0, count:0 }
+}
+
+// calcular promedio
+const total = producto.rating.rate * producto.rating.count
+
+producto.rating.count += 1
+producto.rating.rate = (total + rating) / producto.rating.count
+
+await producto.save()
+
+res.json({
+mensaje:"Calificación guardada",
+producto
+})
+
+}catch(error){
+
+res.status(500).json({
+error:error.message
+})
+
+}
+
+}
+
 // Modificar un producto
 const ModificarProducto = async (req, res) => {
 
@@ -181,5 +222,6 @@ module.exports = {
     ObtenerPorID,
     CrearUnProducto,
     ModificarProducto,
-    EliminarProducto
+    EliminarProducto,
+    calificarProducto
 }
