@@ -12,29 +12,26 @@ const {
 const upload = require('../../Utilidades/multer')
 
 
-<<<<<<< HEAD
 // OBTENER TODOS
-ruta.get('/producto', ObtenerTodo)
+ruta.get('/productos', ObtenerTodo)
 
 // OBTENER POR ID
-ruta.get('/producto/:id', ObtenerPorID)
+ruta.get('/productos/:id', ObtenerPorID)
 
 // CREAR PRODUCTO
-ruta.post('/producto', upload.single('imagen'), CrearUnProducto)
+ruta.post('/productos', upload.single('imagen'), CrearUnProducto)
 
 // ACTUALIZAR PRODUCTO
-ruta.put('/producto/update/:id', upload.single('imagen'), ModificarProducto)
-=======
+ruta.put('/productos/update/:id', upload.single('imagen'), ModificarProducto)
 ruta.get('/productos', ObtenerTodo)
 ruta.get('/productos/:id', ObtenerPorID)
 ruta.post('/productos', upload.single('imagen'), CrearUnProducto)
 
 
-ruta.put("/update", verificarToken,  ModificarProducto);
-ruta.delete("/delete/:id", verificarToken, EliminarProducto);
->>>>>>> b8969ed7fb7427f57168901d020ddee23f874774
+//ruta.put("/update", verificarToken,  ModificarProducto);
+
 
 // ELIMINAR PRODUCTO
-ruta.delete('/producto/delete/:id', EliminarProducto)
+ruta.delete('/productos/delete/:id', EliminarProducto)
 
 module.exports = ruta

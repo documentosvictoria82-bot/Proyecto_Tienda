@@ -25,7 +25,7 @@ async function cargarProductos(){
 
 try{
 
-const respuesta = await fetch("http://localhost:3007/api/producto");
+const respuesta = await fetch("http://localhost:3007/api/productos");
 const productos = await respuesta.json();
 
 // limpiar contenedor

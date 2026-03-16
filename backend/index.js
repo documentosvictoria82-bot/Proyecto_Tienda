@@ -19,17 +19,7 @@ server.use(express.json());
 server.use(express.static(path.join (__dirname, '../Frontend')))
 console.log(path.join (__dirname, 'public'))
 
-//    server.use((req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", "*");
-//     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-//     next();
-// });
-//Crear carpeta para midleware, para tenerlos separados y después llamarlo. del 14 - 19
-// server.get('/', (req, res) =>{ 
-// res.send(path.join (__dirname, '../Frontend'))
-// })
-    
+
 server.use('/api', ruta)
 server.use('/api', usuarioRuta)
  server.listen(PORT, ()=>{
