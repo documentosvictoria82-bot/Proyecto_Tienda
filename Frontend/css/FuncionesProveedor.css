@@ -1,47 +1,204 @@
-/* 1. Reset básico */
-* { box-sizing: border-box; font-family: Arial, sans-serif; }
+/* ============================= */
+/* 1. RESET BÁSICO */
+/* ============================= */
 
-body { background-color: #f4f7f6; padding: 20px; }
-
-/* 2. El Formulario (Panel de control) */
-#formProducto {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    max-width: 500px;
-    margin: 0 auto 30px auto;
+*{
+box-sizing:border-box;
+font-family:Arial, sans-serif;
 }
 
-#formProducto input {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+body{
+background-color:#f4f7f6;
+padding:20px;
 }
 
-/* 3. La cuadrícula de Productos */
-#listaProductos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+
+/* ============================= */
+/* 2. FORMULARIO ADMIN */
+/* ============================= */
+
+#formProducto{
+
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+max-width:500px;
+margin:0 auto 40px auto;
+
 }
 
-/* 4. Estilo de cada tarjeta de producto */
-.producto-card {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 5px solid #28a745; /* Un toque verde para identificar */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+#formProducto h2{
+text-align:center;
+margin-bottom:20px;
 }
 
-.producto-card button {
-    margin-right: 10px;
-    cursor: pointer;
-    padding: 5px 10px;
+#formProducto input,
+#formProducto textarea{
+
+display:block;
+width:100%;
+margin-bottom:12px;
+padding:10px;
+border:1px solid #ddd;
+border-radius:6px;
+transition:0.2s;
+
 }
-.btn-eliminar { background-color: #e74c3c; color: white; border: none; padding: 8px; border-radius: 5px; }
-.btn-modificar { background-color: #3498db; color: white; border: none; padding: 8px; border-radius: 5px; }
+
+#formProducto input:focus,
+#formProducto textarea:focus{
+
+border-color:#333;
+outline:none;
+
+}
+
+
+/* BOTÓN GUARDAR */
+
+.btn-agregar{
+
+width:100%;
+background:#212529;
+color:white;
+border:none;
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+transition:0.2s;
+
+}
+
+.btn-agregar:hover{
+
+background:#000;
+
+}
+
+
+
+/* ============================= */
+/* 3. CUADRÍCULA DE PRODUCTOS */
+/* ============================= */
+
+#listaProductos{
+
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:20px;
+
+}
+
+
+
+/* ============================= */
+/* 4. TARJETA DE PRODUCTO */
+/* ============================= */
+
+.producto-card{
+
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+transition:0.2s;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+
+}
+
+.producto-card:hover{
+
+transform:translateY(-4px);
+box-shadow:0 8px 20px rgba(0,0,0,0.12);
+
+}
+
+
+
+/* ============================= */
+/* 5. IMAGEN DEL PRODUCTO */
+/* ============================= */
+
+.producto-card img{
+
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:6px;
+margin-bottom:10px;
+
+}
+
+
+
+/* ============================= */
+/* 6. TEXTO PRODUCTO */
+/* ============================= */
+
+.producto-card h4{
+
+margin-bottom:5px;
+
+}
+
+.producto-precio{
+
+font-weight:bold;
+color:#28a745;
+
+}
+
+.producto-stock{
+
+font-size:13px;
+color:#666;
+
+}
+
+
+
+/* ============================= */
+/* 7. BOTONES */
+/* ============================= */
+
+.producto-card button{
+
+margin-right:10px;
+cursor:pointer;
+padding:6px 10px;
+border-radius:6px;
+font-size:13px;
+border:none;
+transition:0.2s;
+
+}
+
+.btn-eliminar{
+
+background-color:#e74c3c;
+color:white;
+
+}
+
+.btn-eliminar:hover{
+
+background:#c0392b;
+
+}
+
+.btn-modificar{
+
+background-color:#3498db;
+color:white;
+
+}
+
+.btn-modificar:hover{
+
+background:#21618c;
+
+}

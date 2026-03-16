@@ -1,3 +1,7 @@
+// =============================
+// ELEMENTOS DEL DOM
+// =============================
+
 const rolActual = localStorage.getItem("role");
 
 console.log("El rol detectado es:", rolActual); // Esto te ayudará a ver el error en la consola
@@ -10,81 +14,189 @@ if (!rolActual || rolActual.toLowerCase() !== 'admin') {
 
 const form = document.getElementById("formProducto");
 const lista = document.getElementById("listaProductos");
-let productoEditandoId = null; // Esta variable "recuerda" si estamos editando
+
+let productoEditandoId = null;
 
 
+// =============================
+// 1️⃣ CARGAR PRODUCTOS
+// =============================
+async function cargarProductos(){
 
-// 1. CARGAR PRODUCTOS AL ABRIR LA PÁGINA
-async function cargarProductos() {
-    const respuesta = await fetch("http://localhost:3007/api/productos");
-    const productos = await respuesta.json();
-    lista.innerHTML = ""; 
+try{
 
-    productos.forEach(producto => {
-        const card = document.createElement("div");
-        card.innerHTML = `<h3>${producto.name}</h3><p>Precio: $${producto.price}</p>`;
-        
-        // Botones de acción
-        const btnEliminar = document.createElement("button");
-        btnEliminar.className = "btn-eliminar";
-        btnEliminar.innerText = "Eliminar";
-        btnEliminar.onclick = () => eliminarProducto(producto._id);
-        
-        const btnModificar = document.createElement("button");
-        btnModificar.className = "btn-modificar";
-        btnModificar.innerText = "Modificar";
-        btnModificar.onclick = () => prepararEdicion(producto);
+const respuesta = await fetch("http://localhost:3007/api/productos");
+const productos = await respuesta.json();
 
-        card.appendChild(btnEliminar);
-        card.appendChild(btnModificar);
-        lista.appendChild(card);
-    });
-}
+// limpiar contenedor
+lista.innerHTML="";
 
-// 2. CREAR O ACTUALIZAR (El botón Guardar)
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const datos = {
-        name: document.getElementById("name").value,
-        description: document.getElementById("description").value,
-        price: document.getElementById("price").value,
-        stock: document.getElementById("stock").value
-    };
+// recorrer productos
+productos.forEach(producto=>{
 
-    if (productoEditandoId) {
-        // MODO MODIFICAR
-        await fetch(`http://localhost:3007/api/productos/update/${productoEditandoId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(datos)
-        });
-    } else {
-        // MODO CREAR
-        await fetch("http://localhost:3007/api/productos/crear", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(datos)
-        });
-    }
-    location.reload();
+// crear tarjeta
+const card = document.createElement("div");
+card.classList.add("producto-card");
+
+
+// imagen del producto
+const imagen = producto.image
+? `http://localhost:3007${producto.image}`
+: "https://via.placeholder.com/300";
+
+
+// contenido de la tarjeta
+card.innerHTML = `
+
+<img src="${imagen}">
+
+<h4>${producto.name}</h4>
+
+<p>${producto.description || ""}</p>
+
+<p class="producto-precio">$${producto.price}</p>
+
+<p class="producto-stock">Stock: ${producto.stock}</p>
+
+`;
+
+
+// =============================
+// BOTÓN ELIMINAR
+// =============================
+
+const btnEliminar = document.createElement("button");
+
+btnEliminar.className="btn-eliminar";
+btnEliminar.innerText="Eliminar";
+
+btnEliminar.onclick=()=>eliminarProducto(producto._id);
+
+
+// =============================
+// BOTÓN MODIFICAR
+// =============================
+
+const btnModificar = document.createElement("button");
+
+btnModificar.className="btn-modificar";
+btnModificar.innerText="Modificar";
+
+btnModificar.onclick=()=>prepararEdicion(producto);
+
+
+// agregar botones
+card.appendChild(btnEliminar);
+card.appendChild(btnModificar);
+
+
+// agregar card a la lista
+lista.appendChild(card);
+
 });
 
-// 3. PREPARAR PARA MODIFICAR
-function prepararEdicion(producto) {
-    productoEditandoId = producto._id;
-    document.getElementById("name").value = producto.name;
-    document.getElementById("description").value = producto.description;
-    document.getElementById("price").value = producto.price;
-    document.getElementById("stock").value = producto.stock;
+}catch(error){
+
+console.log("Error cargando productos:",error);
+
 }
 
-// 4. ELIMINAR
-async function eliminarProducto(id) {
-    if(confirm("¿Estás seguro?")) {
-        await fetch(`http://localhost:3007/api/productos/delete/${id}`, { method: "DELETE" });
-        location.reload();
-    }
 }
+
+
+
+// =============================
+// 2️⃣ CREAR O ACTUALIZAR PRODUCTO
+// =============================
+form.addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+// crear formData
+const formData = new FormData();
+
+formData.append("name",document.getElementById("name").value);
+formData.append("description",document.getElementById("description").value);
+formData.append("price",document.getElementById("price").value);
+formData.append("stock",document.getElementById("stock").value);
+formData.append("category",document.getElementById("category").value);
+
+const imagen = document.getElementById("imagen").files[0];
+
+if(imagen){
+formData.append("imagen",imagen);
+}
+
+try{
+
+if(productoEditandoId){
+
+// ✏️ ACTUALIZAR PRODUCTO
+await fetch(`http://localhost:3007/api/producto/update/${productoEditandoId}`,{
+method:"PUT",
+body:formData
+});
+
+productoEditandoId=null;
+
+}else{
+
+// ➕ CREAR PRODUCTO
+await fetch("http://localhost:3007/api/producto",{
+method:"POST",
+body:formData
+});
+
+}
+
+form.reset();
+
+cargarProductos();
+
+}catch(error){
+
+console.log("Error:",error);
+
+}
+
+});
+
+
+
+// =============================
+// 3️⃣ PREPARAR EDICIÓN
+// =============================
+function prepararEdicion(producto){
+
+productoEditandoId = producto._id;
+
+document.getElementById("name").value = producto.name;
+document.getElementById("description").value = producto.description;
+document.getElementById("price").value = producto.price;
+document.getElementById("stock").value = producto.stock;
+
+}
+
+
+
+// =============================
+// 4️⃣ ELIMINAR PRODUCTO
+// =============================
+async function eliminarProducto(id){
+
+const confirmar = confirm("¿Estás seguro de eliminar este producto?");
+
+if(!confirmar) return;
+
+await fetch(`http://localhost:3007/api/producto/delete/${id}`,{
+method:"DELETE"
+});
+
+cargarProductos();
+
+}
+
+
 
 // ¡EJECUTAR AL INICIO!
 cargarProductos();

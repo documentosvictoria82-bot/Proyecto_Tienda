@@ -1,11 +1,11 @@
 
 ###
 
-GET http://localhost:3007/api/producto 
+GET http://localhost:3007/api/productos 
 
 ###
 
-POST http://localhost:3007/api/producto
+POST http://localhost:3007/api/productos
 Content-Type: application/json
 
 {

@@ -1,5 +1,7 @@
 const Product = require('../modelo/productos.modelo')
 const express = require('express')
+const fs = require("fs");
+const path = require("path");
 
 // Obtener todos los productos
 const ObtenerTodo = async (req, res) => {
@@ -59,63 +61,100 @@ const ObtenerPorID = async (req, res) => {
 const CrearUnProducto = async (req, res) => {
 
     try {
-         const nuevoProducto= new Product(req.body)
-         console.log(nuevoProducto)
+
+        const { name, description, price, stock, category } = req.body;
+
+        const nuevoProducto = new Product({
+            name,
+            description,
+            price,
+            stock,
+            category,
+            image: req.file ? `/uploads/${req.file.filename}` : ""
+        });
+
+        console.log("PRODUCTO A GUARDAR:", nuevoProducto);
+
         await nuevoProducto.save();
-        console.log(nuevoProducto)
-        res.status(201).json(nuevoProducto)
 
-            // name: body.name,
-            // description: body.description,
-            // price: parseFloat(body.price),
-            // stock: parseInt(body.stock),
-            // category: body.category,
-
-            // rating: {
-            //     rate: parseFloat(body.rating.rate),
-            //     count: parseInt(body.rating.count)
-            // },
-
-            // images: req.file ? [req.file.filename] : []
-
-       // })
-
-        // const productoGuardado = await nuevoProducto.save()
-        // console.log(nuevoProducto)
-        // res.status(201).json(productoGuardado)
+        res.status(201).json(nuevoProducto);
 
     } catch (error) {
 
         res.status(400).json({
             error: "Los datos enviados son incorrectos",
             details: error.message
-        })
+        });
 
     }
 
-}
+};
 
 // Modificar un producto
 const ModificarProducto = async (req, res) => {
+
     try {
-        const { id } = req.params; // Obtenemos el id de la URL
-        const datosActualizados = req.body; // Obtenemos los nuevos datos
 
-        // Buscamos y actualizamos
-        const productoActualizado = await Product.findByIdAndUpdate(id, datosActualizados, { new: true });
+        const { id } = req.params;
 
-        if (!productoActualizado) {
-            return res.status(404).json({ mensaje: "Producto no encontrado" });
+        // Buscar el producto actual
+        const producto = await Product.findById(id);
+
+        if (!producto) {
+            return res.status(404).json({
+                mensaje: "Producto no encontrado"
+            });
         }
 
-        res.status(200).json({ 
-            mensaje: "Producto actualizado con éxito", 
-            producto: productoActualizado 
+        const datosActualizados = {
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            stock: req.body.stock,
+            category: req.body.category
+        };
+
+        // Si se sube una nueva imagen
+        if (req.file) {
+
+            // Eliminar imagen anterior si existe
+            if (producto.image) {
+
+                const rutaImagen = path.join(__dirname, "../../public", producto.image);
+
+                fs.unlink(rutaImagen, (err) => {
+                    if (err) {
+                        console.log("No se pudo eliminar la imagen anterior:", err);
+                    }
+                });
+
+            }
+
+            // Guardar nueva imagen
+            datosActualizados.image = `/uploads/${req.file.filename}`;
+        }
+
+        const productoActualizado = await Product.findByIdAndUpdate(
+            id,
+            datosActualizados,
+            { new: true }
+        );
+
+        res.status(200).json({
+            mensaje: "Producto actualizado correctamente",
+            producto: productoActualizado
         });
+
     } catch (error) {
-        console.error("Error al modificar producto:", error);
-        res.status(500).json({ mensaje: "Error al modificar el producto", error: error.message });
+
+        console.error(error);
+
+        res.status(500).json({
+            mensaje: "Error al actualizar el producto"
+        });
+
     }
+
 };
 
 // Eliminar un producto

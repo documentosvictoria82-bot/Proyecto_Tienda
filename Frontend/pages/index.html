@@ -1,29 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tienda Virtual</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
 
     <title>Tienda virtual</title>
 </head>
 <body>
- 
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-<div class="container">
-<a class="navbar-brand" href="#">🛒 Mi Tienda</a>
 
-<a href="login.html">Iniciar Sesión</a>
-<a href="registro.html">Registrarse</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+
+<a class="navbar-brand" href="#">🛒 Mi Tienda</a>
 
 <form class="d-flex">
 <input class="form-control me-2" type="search" placeholder="Buscar producto">
 <button class="btn btn-outline-light">Buscar</button>
 </form>
 
+<select id="ordenarPrecio" class="form-select w-25 mb-3">
+
+<option value="">Ordenar</option>
+<option value="menor">Precio menor</option>
+<option value="mayor">Precio mayor</option>
+
+</select>
+
+<!-- Carrito -->
+<div class="carrito-icono" onclick="toggleCarrito()">
+🛒
+<span id="contadorCarrito">0</span>
+<a href="login.html">Iniciar Sesión</a>
+<a href="registro.html">Registrarse</a>
+
 </div>
+
 </nav>
+
+
+<div class="container mt-4">
+
+<h5>Categorías</h5>
+
+<div class="categorias">
+
+<button class="btn btn-outline-dark categoria" data-cat="todos">Todos</button>
+<button class="btn btn-outline-dark categoria" data-cat="Celular">Celulares</button>
+<button class="btn btn-outline-dark categoria" data-cat="Accesorio">Accesorios</button>
+<button class="btn btn-outline-dark categoria" data-cat="Laptop">Laptops</button>
+
+</div>
+
+<br>
+
+<h6>Filtrar por precio</h6>
+
+<input 
+type="range" 
+min="0" 
+max="5000" 
+step="50"
+id="filtroPrecio"
+class="form-range">
+
+<p>Precio máximo: $<span id="precioValor">20000000</span></p>
+
+</div>
+
 
 <div class="container mt-5">
 
@@ -36,6 +84,44 @@
 <script src="../js/producto.js"></script>
 
 
+<!-- PANEL CARRITO -->
+
+<!-- PANEL CARRITO -->
+
+<div id="panelCarrito" class="panel-carrito">
+
+<div class="carrito-header">
+
+<h4>🛒 Carrito</h4>
+
+<button class="cerrar-carrito" onclick="toggleCarrito()">✖</button>
+
+</div>
+
+<div id="listaCarrito"></div>
+
+<button 
+class="btn btn-outline-dark w-100 mt-2"
+onclick="vaciarCarrito()">
+
+🗑 Vaciar carrito
+
+</button>
+
+<button class="btn btn-dark w-100 mt-3">
+Finalizar compra
+</button>
+
+</div>
+
+
+<!-- SCRIPT AL FINAL -->
+
+<script src="../js/producto.js"></script>
+
+<div id="toastCarrito" class="toast-carrito">
+Producto agregado al carrito 🛒
+</div>
 
 </body>
 </html> 

@@ -1,21 +1,37 @@
 const express = require('express')
 const ruta = express.Router()
-const {ObtenerTodo, ObtenerPorID, CrearUnProducto, ModificarProducto, EliminarProducto} = require('../controlador/ProductoControler')
+
+const { 
+    ObtenerTodo, 
+    ObtenerPorID, 
+    CrearUnProducto, 
+    ModificarProducto, 
+    EliminarProducto 
+} = require('../controlador/ProductoControler')
+
 const upload = require('../../Utilidades/multer')
-const { verificarToken } = require('../middleware');
 
 
+// OBTENER TODOS
+ruta.get('/productos', ObtenerTodo)
 
+// OBTENER POR ID
+ruta.get('/productos/:id', ObtenerPorID)
+
+// CREAR PRODUCTO
+ruta.post('/productos', upload.single('imagen'), CrearUnProducto)
+
+// ACTUALIZAR PRODUCTO
+ruta.put('/productos/update/:id', upload.single('imagen'), ModificarProducto)
 ruta.get('/productos', ObtenerTodo)
 ruta.get('/productos/:id', ObtenerPorID)
 ruta.post('/productos', upload.single('imagen'), CrearUnProducto)
 
 
-ruta.put("/update", verificarToken,  ModificarProducto);
-ruta.delete("/delete/:id", verificarToken, EliminarProducto);
+//ruta.put("/update", verificarToken,  ModificarProducto);
 
-//ruta.post('/productos', ()=>{
-//    res.send(".")
-//}
+
+// ELIMINAR PRODUCTO
+ruta.delete('/productos/delete/:id', EliminarProducto)
 
 module.exports = ruta
