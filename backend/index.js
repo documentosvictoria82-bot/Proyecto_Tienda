@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000
 conectar()
 
 server.use(express.json());
-server.use(express.static(path.join (__dirname, '../Frontend')))
+server.use('/uploads', express.static(path.join(__dirname, 'public/uploads')))
 console.log(path.join (__dirname, 'public'))
 
 
