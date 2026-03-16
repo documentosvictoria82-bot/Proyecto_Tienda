@@ -1,7 +1,7 @@
 // =============================
 // URL DE LA API DEL BACKEND
 // =============================
-const API = "http://localhost:3007/api/productos"
+const API = "https://proyecto-tienda-rho.vercel.app/api/productos"
 
 
 // =============================

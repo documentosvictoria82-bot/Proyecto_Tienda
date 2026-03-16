@@ -23,7 +23,7 @@ console.log(path.join (__dirname, 'public'))
 server.use('/api', ruta)
 server.use('/api', usuarioRuta)
  server.listen(PORT, ()=>{
-     console.log(`servidor corriendo en http://localhost:${PORT}`);
+     console.log(`servidor corriendo en proyecto-tienda-rho.vercel.app`);
  })
      // Importas la función desde donde la tengas (ej. indexconf.js)
 const { desconectar } = require('./src/config/indexconf'); 

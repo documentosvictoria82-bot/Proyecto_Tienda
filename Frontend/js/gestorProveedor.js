@@ -25,7 +25,7 @@ async function cargarProductos(){
 
 try{
 
-const respuesta = await fetch("http://localhost:3007/api/productos");
+const respuesta = await fetch("https://proyecto-tienda-rho.vercel.app/api/productos");
 const productos = await respuesta.json();
 
 // limpiar contenedor
@@ -41,7 +41,7 @@ card.classList.add("producto-card");
 
 // imagen del producto
 const imagen = producto.image
-? `http://localhost:3007${producto.image}`
+? `http://proyecto-tienda-rho.vercel.app${producto.image}`
 : "https://via.placeholder.com/300";
 
 

@@ -1,11 +1,11 @@
 
 ###
 
-GET http://localhost:3007/api/productos 
+GET https://proyecto-tienda-rho.vercel.app/api/productos 
 
 ###
 
-POST http://localhost:3007/api/productos
+POST https://proyecto-tienda-rho.vercel.app/api/productos
 Content-Type: application/json
 
 {

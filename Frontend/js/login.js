@@ -1,6 +1,6 @@
 //const url = new URLSearchParams(window.location.search)
 //console.log(url.getAll('idproducto'));
-const API = "http://localhost:3007/api/login"
+const API = "https://proyecto-tienda-rho.vercel.app/api/login"
 
 const form = document.getElementById("loginForm")
 
