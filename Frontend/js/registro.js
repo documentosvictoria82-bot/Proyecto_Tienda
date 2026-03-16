@@ -9,11 +9,13 @@ e.preventDefault()
 const usuario = document.getElementById("usuario").value
 const email = document.getElementById("email").value
 const password = document.getElementById("password").value
+const role = document.getElementById("role").value // Capturamos el rol
 
 const data = {
-usuario,
-email,
-password
+    usuario,
+    email,
+    password,
+    role // Lo añadimos al objeto que se envía
 }
 
 const response = await fetch(API,{

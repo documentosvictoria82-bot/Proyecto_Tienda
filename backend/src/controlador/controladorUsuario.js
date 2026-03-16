@@ -8,7 +8,7 @@ const register = async (req, res) => {
 
     try {
 
-        const { usuario, email, password } = req.body
+        const { usuario, email, password, role } = req.body
 
         // verificar si el usuario ya existe
         const userExist = await User.findOne({ email })
@@ -24,11 +24,12 @@ const register = async (req, res) => {
         const passwordHash = await bcrypt.hash(password, salt)
 
         // crear usuario
+        
         const newUser = new User({
             usuario,
             email,
             password: passwordHash,
-            role: 'admin'
+            role: role ||'user'
         })
 
         const savedUser = await newUser.save()
