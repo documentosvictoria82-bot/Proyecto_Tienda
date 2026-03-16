@@ -1,22 +1,30 @@
 const express = require('express')
 const ruta = express.Router()
-const {ObtenerTodo, ObtenerPorID, CrearUnProducto, ModificarProducto, EliminarProducto} = require('../controlador/ProductoControler')
+
+const { 
+    ObtenerTodo, 
+    ObtenerPorID, 
+    CrearUnProducto, 
+    ModificarProducto, 
+    EliminarProducto 
+} = require('../controlador/ProductoControler')
+
 const upload = require('../../Utilidades/multer')
-const { verificarToken } = require('../middleware');
 
 
-
+// OBTENER TODOS
 ruta.get('/producto', ObtenerTodo)
+
+// OBTENER POR ID
 ruta.get('/producto/:id', ObtenerPorID)
+
+// CREAR PRODUCTO
 ruta.post('/producto', upload.single('imagen'), CrearUnProducto)
 
-// Ejemplo de cómo deberían verse tus rutas protegidas
-ruta.post("/add", verificarToken, CrearUnProducto);
-ruta.put("/update", verificarToken,  ModificarProducto);
-ruta.delete("/delete/:id", verificarToken, EliminarProducto);
+// ACTUALIZAR PRODUCTO
+ruta.put('/producto/update/:id', upload.single('imagen'), ModificarProducto)
 
-//ruta.post('/productos', ()=>{
-//    res.send(".")
-//}
+// ELIMINAR PRODUCTO
+ruta.delete('/producto/delete/:id', EliminarProducto)
 
 module.exports = ruta
