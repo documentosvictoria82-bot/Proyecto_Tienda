@@ -132,7 +132,7 @@ try{
 if(productoEditandoId){
 
 // ✏️ ACTUALIZAR PRODUCTO
-await fetch(`http://localhost:3007/api/producto/update/${productoEditandoId}`,{
+await fetch(`http://localhost:3007/api/productos/update/${productoEditandoId}`,{
 method:"PUT",
 body:formData
 });
@@ -142,7 +142,7 @@ productoEditandoId=null;
 }else{
 
 // ➕ CREAR PRODUCTO
-await fetch("http://localhost:3007/api/producto",{
+await fetch("http://localhost:3007/api/productos",{
 method:"POST",
 body:formData
 });
@@ -188,7 +188,7 @@ const confirmar = confirm("¿Estás seguro de eliminar este producto?");
 
 if(!confirmar) return;
 
-await fetch(`http://localhost:3007/api/producto/delete/${id}`,{
+await fetch(`http://localhost:3007/api/productos/delete/${id}`,{
 method:"DELETE"
 });
 

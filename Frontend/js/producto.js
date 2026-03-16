@@ -52,7 +52,8 @@ function mostrarProductos(productos){
 
 const contenedor = document.getElementById("productos")
 
-// limpiamos el contenedor
+if(!contenedor) return
+
 contenedor.innerHTML=""
 
 // recorremos cada producto
@@ -115,7 +116,10 @@ contenedor.appendChild(card)
 // 3️⃣ BUSCADOR DE PRODUCTOS
 // =============================
 
+document.addEventListener("DOMContentLoaded", ()=>{
+
 const formBuscar = document.getElementById("formBuscar")
+const inputBuscar = document.getElementById("inputBuscar")
 
 if(formBuscar){
 
@@ -124,11 +128,7 @@ formBuscar.addEventListener("submit",(e)=>{
 // evitar que recargue la página
 e.preventDefault()
 
-// texto buscado
-const texto = document
-.getElementById("inputBuscar")
-.value
-.toLowerCase()
+const texto = inputBuscar.value.toLowerCase()
 
 // filtrar productos por nombre
 const filtrados = todosLosProductos.filter(producto =>
@@ -141,6 +141,26 @@ mostrarProductos(filtrados)
 })
 
 }
+
+
+// BUSCAR MIENTRAS ESCRIBES
+if(inputBuscar){
+
+inputBuscar.addEventListener("input",()=>{
+
+const texto = inputBuscar.value.toLowerCase()
+
+const filtrados = todosLosProductos.filter(producto =>
+producto.name.toLowerCase().includes(texto)
+)
+
+mostrarProductos(filtrados)
+
+})
+
+}
+
+})
 
 
 
@@ -210,6 +230,7 @@ renderCarrito()
 
 //Notificion cuando se agrega al carrito
 mostrarToast()
+
 }
 
 
@@ -236,7 +257,7 @@ renderCarrito()
 
 
 // =============================
-// 7️⃣ CAMBIAR CANTIDAD DEL PRODUCTO
+// 7️⃣ CAMBIAR CANTIDAD
 // =============================
 function cambiarCantidad(id,cambio){
 
@@ -245,7 +266,7 @@ const producto = carrito.find(p=>p._id === id)
 // aumentar o disminuir
 producto.cantidad += cambio
 
-// si llega a 0 se elimina
+//Canitidad carrito
 if(producto.cantidad <= 0){
 
 eliminarProductoCarrito(id)
@@ -261,7 +282,7 @@ renderCarrito()
 
 
 // =============================
-// 8️⃣ ACTUALIZAR CONTADOR DEL CARRITO
+// 8️⃣ ACTUALIZAR CONTADOR
 // =============================
 function actualizarContador(){
 
@@ -292,8 +313,9 @@ renderCarrito()
 }
 
 
+
 // =============================
-// 🔟 MOSTRAR PRODUCTOS EN CARRITO
+// 🔟 RENDER CARRITO
 // =============================
 function renderCarrito(){
 
@@ -324,8 +346,9 @@ const div = document.createElement("div")
 div.classList.add("item-carrito")
 
 const imagen = producto.image
-? "http://localhost:3007" + producto.image
-: "https://via.placeholder.com/80"
+? `http://localhost:3007${producto.image}`
+: "https://via.placeholder.com/300";
+
 
 // subtotal
 const subtotal = producto.price * producto.cantidad
@@ -397,8 +420,9 @@ lista.appendChild(totalHTML)
 }
 
 
+
 // =============================
-// 11️⃣ GUARDAR CARRITO EN LOCALSTORAGE
+// 11️⃣ GUARDAR CARRITO
 // =============================
 function guardarCarrito(){
 
@@ -406,6 +430,11 @@ localStorage.setItem("carrito",JSON.stringify(carrito))
 
 }
 
+
+
+// =============================
+// TOAST
+// =============================
 function mostrarToast(){
 
 const toast = document.getElementById("toastCarrito")
@@ -419,6 +448,8 @@ toast.classList.remove("mostrar")
 },2000)
 
 }
+
+
 
 // =============================
 // VACIAR CARRITO
@@ -442,6 +473,11 @@ renderCarrito()
 
 }
 
+
+
+// =============================
+// ORDENAR POR PRECIO
+// =============================
 const ordenarPrecio = document.getElementById("ordenarPrecio")
 
 if(ordenarPrecio){
@@ -468,8 +504,11 @@ mostrarProductos(productosOrdenados)
 
 }
 
-//Filtrar por precio
 
+
+// =============================
+// FILTRO PRECIO
+// =============================
 const filtroPrecio = document.getElementById("filtroPrecio")
 
 if(filtroPrecio){
@@ -489,8 +528,9 @@ mostrarProductos(filtrados)
 }
 
 
+
 // =============================
-// 12️⃣ INICIAR APLICACIÓN
+// 12️⃣ INICIAR APP
 // =============================
 
 // cargar productos
