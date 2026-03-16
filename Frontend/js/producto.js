@@ -541,3 +541,43 @@ actualizarContador()
 
 // mostrar carrito si hay productos guardados
 renderCarrito()
+
+
+// CONTROL DE SESIÓN (LOGIN / LOGOUT)
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Referencias a los elementos del navbar
+    const linkLogin = document.getElementById("linkLogin");
+    const linkRegistro = document.getElementById("linkRegistro");
+    const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+
+    // Revisamos si existe el token en el localStorage
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        // SI HAY SESIÓN:
+        // Ocultamos los enlaces de Iniciar Sesión y Registro
+        if (linkLogin) linkLogin.classList.add("d-none");
+        if (linkRegistro) linkRegistro.classList.add("d-none");
+        
+        // Mostramos el botón de Cerrar Sesión
+        if (btnCerrarSesion) btnCerrarSesion.classList.remove("d-none");
+    }
+
+    // Lógica para el botón de Cerrar Sesión
+    if (btnCerrarSesion) {
+        btnCerrarSesion.addEventListener("click", () => {
+            // 1. Borramos los datos de autenticación
+            localStorage.removeItem("token");
+            localStorage.removeItem("role");
+            
+            // Opcional: Borrar el carrito al cerrar sesión si lo deseas
+            // localStorage.removeItem("carrito");
+
+            alert("Sesión cerrada correctamente. ¡Vuelve pronto!");
+
+            // 2. Redirigimos al inicio y recargamos la página
+            window.location.href = "index.html"; 
+        });
+    }
+});
