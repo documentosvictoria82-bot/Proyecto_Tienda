@@ -53,14 +53,14 @@ form.addEventListener("submit", async (e) => {
 
     if (productoEditandoId) {
         // MODO MODIFICAR
-        await fetch(`http://localhost:3007/api/producto/update/${productoEditandoId}`, {
+        await fetch(`http://localhost:3007/api/productos/update/${productoEditandoId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos)
         });
     } else {
         // MODO CREAR
-        await fetch("http://localhost:3007/api/producto/crear", {
+        await fetch("http://localhost:3007/api/productos/crear", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos)
@@ -81,7 +81,7 @@ function prepararEdicion(producto) {
 // 4. ELIMINAR
 async function eliminarProducto(id) {
     if(confirm("¿Estás seguro?")) {
-        await fetch(`http://localhost:3007/api/producto/delete/${id}`, { method: "DELETE" });
+        await fetch(`http://localhost:3007/api/productos/delete/${id}`, { method: "DELETE" });
         location.reload();
     }
 }
