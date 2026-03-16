@@ -198,8 +198,5 @@ cargarProductos();
 
 
 
-// =============================
-// 🚀 INICIAR
-// =============================
-
+// ¡EJECUTAR AL INICIO!
 cargarProductos();
