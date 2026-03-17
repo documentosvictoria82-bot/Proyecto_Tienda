@@ -202,3 +202,8 @@ color:white;
 background:#21618c;
 
 }
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}

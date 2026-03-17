@@ -37,30 +37,61 @@ async function cargarProductos() {
                 : "https://via.placeholder.com/300";
 
             // Insertar contenido HTML básico
-            card.innerHTML = `
-                <img src="${imagenUrl}" alt="${producto.name}">
-                <h4>${producto.name}</h4>
-                <p>${producto.description || ""}</p>
-                <p class="producto-precio">$${producto.price}</p>
-                <p class="producto-stock">Stock: ${producto.stock}</p>
-            `;
+card.className = "col-md-4"; // para usar grid de bootstrap
 
-            // --- BOTÓN ELIMINAR ---
-            const btnEliminar = document.createElement("button");
-            btnEliminar.className = "btn-eliminar";
-            btnEliminar.innerText = "Eliminar";
-            btnEliminar.onclick = () => eliminarProducto(producto._id);
+card.innerHTML = `
+<div class="card h-100 shadow-sm border-0 rounded-4">
 
-            // --- BOTÓN MODIFICAR ---
-            const btnModificar = document.createElement("button");
-            btnModificar.className = "btn-modificar";
-            btnModificar.innerText = "Modificar";
-            btnModificar.onclick = () => prepararEdicion(producto);
+    <img src="${imagenUrl}" class="card-img-top p-3" style="height:180px; object-fit:contain;">
 
-            // Agregar botones y tarjeta al DOM
-            card.appendChild(btnEliminar);
-            card.appendChild(btnModificar);
-            lista.appendChild(card);
+    <div class="card-body d-flex flex-column">
+
+        <h5 class="card-title">${producto.name}</h5>
+
+        <p class="card-text small text-muted">
+            ${producto.description || ""}
+        </p>
+
+        <p class="fw-bold text-success">$${producto.price}</p>
+        <p class="text-muted small">Stock: ${producto.stock}</p>
+
+        <div class="mt-auto d-flex gap-2">
+
+            <button 
+            class="btn btn-outline-dark w-50"
+            onclick="eliminarProducto('${producto._id}')">
+            🗑
+            </button>
+
+            <button 
+            class="btn btn-dark w-50"
+            onclick='prepararEdicion(${JSON.stringify(producto)})'>
+            ✏️
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+`;
+
+            // // --- BOTÓN ELIMINAR ---
+            // const btnEliminar = document.createElement("button");
+            // btnEliminar.className = "btn-eliminar";
+            // btnEliminar.innerText = "Eliminar";
+            // btnEliminar.onclick = () => eliminarProducto(producto._id);
+
+            // // --- BOTÓN MODIFICAR ---
+            // const btnModificar = document.createElement("button");
+            // btnModificar.className = "btn-modificar";
+            // btnModificar.innerText = "Modificar";
+            // btnModificar.onclick = () => prepararEdicion(producto);
+
+            // // Agregar botones y tarjeta al DOM
+            // card.appendChild(btnEliminar);
+            // card.appendChild(btnModificar);
+            // lista.appendChild(card);
         });
     } catch (error) {
         console.error("Error cargando productos:", error);
