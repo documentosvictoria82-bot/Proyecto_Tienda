@@ -122,9 +122,15 @@ productos.forEach(producto=>{
 const estrellas = generarEstrellas(producto.rating?.rate || 0)
 
 // obtener imagen
+// const imagen = producto.image
+// ? "https://proyecto-tienda-rho.vercel.app" + producto.image
+// : "https://via.placeholder.com/300"
+
 const imagen = producto.image
-? "https://proyecto-tienda-rho.vercel.app" + producto.image
-: "https://via.placeholder.com/300"
+  ? producto.image.startsWith("http")
+    ? producto.image
+    : "https://proyecto-tienda-rho.vercel.app" + producto.image
+  : "https://via.placeholder.com/300";
 
 // crear tarjeta del producto
 const card = document.createElement("div")
@@ -413,9 +419,15 @@ const div = document.createElement("div")
 
 div.classList.add("item-carrito")
 
+// const imagen = producto.image
+// ? `https://proyecto-tienda-rho.vercel.app${producto.image}`
+// : "https://via.placeholder.com/300";
+
 const imagen = producto.image
-? `https://proyecto-tienda-rho.vercel.app${producto.image}`
-: "https://via.placeholder.com/300";
+  ? producto.image.startsWith("http")
+    ? producto.image
+    : "https://proyecto-tienda-rho.vercel.app" + producto.image
+  : "https://via.placeholder.com/300";
 
 
 // subtotal
