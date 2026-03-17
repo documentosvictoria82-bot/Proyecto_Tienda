@@ -39,7 +39,7 @@ process.on('SIGINT', async () => {
 });
 
 server.get("/", (req, res) =>{
-        const indexpath = path.join(__dirname, "../Frontend/pages/index.html")
+        const indexpath = path.join(__dirname, "../Frontend/index.html")
         res.sendFile(indexpath)
         // res.sendFile(path.join(publicPath, '../../public/index.html'))
         // res.sendFile(path.join(__dirname, "../public/index.html"))
