@@ -145,13 +145,13 @@ const ModificarProducto = async (req, res) => {
             });
         }
 
-        const datosActualizados = {
-            name: req.body.name,
-            description: req.body.description,
-            price: req.body.price,
-            stock: req.body.stock,
-            category: req.body.category
-        };
+ const datosActualizados = {
+    name: req.body.name,
+    description: req.body.description,
+    price: Number(req.body.price),
+    stock: Number(req.body.stock),
+    category: req.body.category
+};
 
         // ✅ SOLO ESTO (sin fs.unlink)
         if (req.file) {
