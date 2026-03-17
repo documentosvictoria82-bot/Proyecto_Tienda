@@ -355,6 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// FINALIZAR COMPRA
 window.finalizarCompra = function () {
 
     if(carrito.length === 0){
@@ -362,9 +363,15 @@ window.finalizarCompra = function () {
         return;
     }
 
-    alert("✅ Compra realizada con éxito 🎉\n\nGracias por tu compra.");
+    let total = carrito.reduce((acc,p)=> acc + (p.price * p.cantidad),0);
 
-    // limpiar carrito
+    alert(`🧾 Resumen de compra:
+
+Productos: ${carrito.length}
+Total: $${total}
+
+✅ Compra simulada con éxito`);
+
     carrito = [];
     guardarCarrito();
     actualizarContador();
