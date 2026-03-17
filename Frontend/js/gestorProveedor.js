@@ -25,74 +25,57 @@ async function cargarProductos() {
         // Limpiar contenedor antes de renderizar
         lista.innerHTML = "";
 
-        productos.forEach(producto => {
-            // Crear contenedor de la tarjeta
-            const card = document.createElement("div");
-            card.classList.add("producto-card");
+productos.forEach(producto => {
 
-            // Lógica de la imagen
-            const BASE = "https://proyecto-tienda-rho.vercel.app";
-            const imagenUrl = producto.image
-                ? (producto.image.startsWith("http") ? producto.image : BASE + producto.image)
-                : "https://via.placeholder.com/300";
+    const card = document.createElement("div");
 
-            // Insertar contenido HTML básico
-card.className = "col-md-4"; // para usar grid de bootstrap
+    const BASE = "https://proyecto-tienda-rho.vercel.app";
+    const imagenUrl = producto.image
+        ? (producto.image.startsWith("http") ? producto.image : BASE + producto.image)
+        : "https://via.placeholder.com/300";
 
-card.innerHTML = `
-<div class="card h-100 shadow-sm border-0 rounded-4">
+    card.className = "col-md-4";
 
-    <img src="${imagenUrl}" class="card-img-top p-3" style="height:180px; object-fit:contain;">
+    card.innerHTML = `
+    <div class="card h-100 shadow-sm border-0 rounded-4">
 
-    <div class="card-body d-flex flex-column">
+        <img src="${imagenUrl}" class="card-img-top p-3" style="height:180px; object-fit:contain;">
 
-        <h5 class="card-title">${producto.name}</h5>
+        <div class="card-body d-flex flex-column">
 
-        <p class="card-text small text-muted">
-            ${producto.description || ""}
-        </p>
+            <h5 class="card-title">${producto.name}</h5>
 
-        <p class="fw-bold text-success">$${producto.price}</p>
-        <p class="text-muted small">Stock: ${producto.stock}</p>
+            <p class="card-text small text-muted">
+                ${producto.description || ""}
+            </p>
 
-        <div class="mt-auto d-flex gap-2">
+            <p class="fw-bold text-success">$${producto.price}</p>
+            <p class="text-muted small">Stock: ${producto.stock}</p>
 
-            <button 
-            class="btn btn-outline-dark w-50"
-            onclick="eliminarProducto('${producto._id}')">
-            🗑
-            </button>
+            <div class="mt-auto d-flex gap-2">
 
-            <button 
-            class="btn btn-dark w-50"
-            onclick='prepararEdicion(${JSON.stringify(producto)})'>
-            ✏️
-            </button>
+                <button 
+                class="btn btn-outline-danger w-50"
+                onclick="eliminarProducto('${producto._id}')">
+                🗑 Eliminar
+                </button>
+
+                <button 
+                class="btn btn-dark w-50"
+                onclick='prepararEdicion(${JSON.stringify(producto)})'>
+                ✏️ Editar
+                </button>
+
+            </div>
 
         </div>
 
     </div>
+    `;
 
-</div>
-`;
-
-            // // --- BOTÓN ELIMINAR ---
-            // const btnEliminar = document.createElement("button");
-            // btnEliminar.className = "btn-eliminar";
-            // btnEliminar.innerText = "Eliminar";
-            // btnEliminar.onclick = () => eliminarProducto(producto._id);
-
-            // // --- BOTÓN MODIFICAR ---
-            // const btnModificar = document.createElement("button");
-            // btnModificar.className = "btn-modificar";
-            // btnModificar.innerText = "Modificar";
-            // btnModificar.onclick = () => prepararEdicion(producto);
-
-            // // Agregar botones y tarjeta al DOM
-            // card.appendChild(btnEliminar);
-            // card.appendChild(btnModificar);
-            // lista.appendChild(card);
-        });
+    // 🔥 ESTA LÍNEA ES LA QUE TE FALTABA
+    lista.appendChild(card);
+});
     } catch (error) {
         console.error("Error cargando productos:", error);
     }
