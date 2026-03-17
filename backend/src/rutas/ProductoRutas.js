@@ -12,7 +12,6 @@ const {
 
 const upload = require('../../Utilidades/multer')
 
-
 // OBTENER TODOS
 ruta.get('/productos', ObtenerTodo)
 
@@ -24,16 +23,11 @@ ruta.post('/productos', upload.single('imagen'), CrearUnProducto)
 
 // ACTUALIZAR PRODUCTO
 ruta.put('/productos/update/:id', upload.single('imagen'), ModificarProducto)
-ruta.get('/productos', ObtenerTodo)
-ruta.get('/productos/:id', ObtenerPorID)
-ruta.post('/productos', upload.single('imagen'), CrearUnProducto)
+
+// CALIFICAR
 ruta.post("/productos/:id/rating", calificarProducto)
 
-
-//ruta.put("/update", verificarToken,  ModificarProducto);
-
-
-// ELIMINAR PRODUCTO
+// ELIMINAR
 ruta.delete('/productos/delete/:id', EliminarProducto)
 
 module.exports = ruta
