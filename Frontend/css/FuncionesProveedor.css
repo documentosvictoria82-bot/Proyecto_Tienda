@@ -28,11 +28,6 @@ margin:0 auto 40px auto;
 
 }
 
-#formProducto h2{
-text-align:center;
-margin-bottom:20px;
-}
-
 #formProducto input,
 #formProducto textarea{
 
@@ -55,163 +50,63 @@ outline:none;
 }
 
 
-/* BOTÓN GUARDAR */
+/* ============================= */
+/* 3. LISTA PRODUCTOS (BOOTSTRAP) */
+/* ============================= */
 
-.btn-agregar{
+/* ❌ ELIMINAMOS GRID */
+/* Bootstrap se encarga del layout */
 
-width:100%;
-background:#212529;
-color:white;
-border:none;
-padding:10px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-transition:0.2s;
-
+#listaProductos {
+    width: 100%;
 }
-
-.btn-agregar:hover{
-
-background:#000;
-
-}
-
 
 
 /* ============================= */
-/* 3. CUADRÍCULA DE PRODUCTOS */
+/* 4. TARJETAS */
 /* ============================= */
 
-#listaProductos{
+.card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+}
 
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-gap:20px;
-
+.card:hover {
+    transform: translateY(-5px);
 }
 
 
-
 /* ============================= */
-/* 4. TARJETA DE PRODUCTO */
+/* 5. IMAGEN */
 /* ============================= */
 
-.producto-card{
-
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
-transition:0.2s;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-
-}
-
-.producto-card:hover{
-
-transform:translateY(-4px);
-box-shadow:0 8px 20px rgba(0,0,0,0.12);
-
+.card img {
+    background-color: #f8f9fa;
 }
 
 
-
 /* ============================= */
-/* 5. IMAGEN DEL PRODUCTO */
-/* ============================= */
-
-.producto-card img{
-
-width:100%;
-height:150px;
-object-fit:cover;
-border-radius:6px;
-margin-bottom:10px;
-
-}
-
-
-
-/* ============================= */
-/* 6. TEXTO PRODUCTO */
+/* 6. TEXTO */
 /* ============================= */
 
-.producto-card h4{
-
-margin-bottom:5px;
-
+/* 🔥 SOLUCIONA EL TEXTO LARGO */
+.descripcion {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 40px;
 }
-
-.producto-precio{
-
-font-weight:bold;
-color:#28a745;
-
-}
-
-.producto-stock{
-
-font-size:13px;
-color:#666;
-
-}
-
 
 
 /* ============================= */
 /* 7. BOTONES */
 /* ============================= */
 
-.producto-card button{
-
-margin-right:10px;
-cursor:pointer;
-padding:6px 10px;
-border-radius:6px;
-font-size:13px;
-border:none;
-transition:0.2s;
-
+button {
+    transition: 0.2s;
 }
 
-.btn-eliminar{
-
-background-color:#e74c3c;
-color:white;
-
-}
-
-.btn-eliminar:hover{
-
-background:#c0392b;
-
-}
-
-.btn-modificar{
-
-background-color:#3498db;
-color:white;
-
-}
-
-.btn-modificar:hover{
-
-background:#21618c;
-
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    transition: 0.3s;
-}
-
-.card {
-    transition: all 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
+button:hover {
+    transform: scale(1.03);
 }

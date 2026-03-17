@@ -22,63 +22,69 @@ async function cargarProductos() {
         const respuesta = await fetch("https://proyecto-tienda-rho.vercel.app/api/productos");
         const productos = await respuesta.json();
 
-        // Limpiar contenedor antes de renderizar
         lista.innerHTML = "";
 
-productos.forEach(producto => {
+        productos.forEach(producto => {
 
-    const card = document.createElement("div");
+            const card = document.createElement("div");
 
-    const BASE = "https://proyecto-tienda-rho.vercel.app";
-    const imagenUrl = producto.image
-        ? (producto.image.startsWith("http") ? producto.image : BASE + producto.image)
-        : "https://via.placeholder.com/300";
+            const BASE = "https://proyecto-tienda-rho.vercel.app";
+            const imagenUrl = producto.image
+                ? (producto.image.startsWith("http") ? producto.image : BASE + producto.image)
+                : "https://via.placeholder.com/300";
 
-    card.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+            // 🔥 GRID CORRECTO + FLEX
+            card.className = "col-12 col-sm-6 col-md-4 col-lg-3 d-flex";
 
-card.innerHTML = `
-<div class="card h-100 shadow-sm border-0 rounded-4">
+            card.innerHTML = `
+            <div class="card h-100 shadow-sm border-0 rounded-4 w-100">
 
-    <img src="${imagenUrl}" 
-    class="card-img-top bg-light"
-    style="height:200px; object-fit:contain; padding:10px;">
+                <img src="${imagenUrl}" 
+                class="card-img-top bg-light"
+                style="height:200px; object-fit:contain; padding:10px;">
 
-    <div class="card-body d-flex flex-column">
+                <div class="card-body d-flex flex-column">
 
-        <h6 class="fw-bold">${producto.name}</h6>
+                    <h6 class="fw-bold text-truncate">
+                        ${producto.name}
+                    </h6>
 
-        <p class="small text-muted mb-1" style="min-height:40px;">
-            ${producto.description || ""}
-        </p>
+                    <p class="small text-muted mb-2 descripcion">
+                        ${producto.description || ""}
+                    </p>
 
-        <p class="fw-bold text-success mb-1">$${producto.price}</p>
+                    <p class="fw-bold text-success mb-1">
+                        $${Number(producto.price).toLocaleString()}
+                    </p>
 
-        <p class="text-muted small">Stock: ${producto.stock}</p>
+                    <p class="text-muted small mb-2">
+                        Stock: ${producto.stock}
+                    </p>
 
-        <div class="mt-auto d-flex gap-2">
+                    <div class="mt-auto d-flex gap-2">
 
-            <button 
-            class="btn btn-outline-danger w-50 btn-sm"
-            onclick="eliminarProducto('${producto._id}')">
-            🗑
-            </button>
+                        <button 
+                        class="btn btn-outline-danger w-50 btn-sm"
+                        onclick="eliminarProducto('${producto._id}')">
+                        🗑
+                        </button>
 
-            <button 
-            class="btn btn-dark w-50 btn-sm"
-            onclick='prepararEdicion(${JSON.stringify(producto)})'>
-            ✏️
-            </button>
+                        <button 
+                        class="btn btn-dark w-50 btn-sm"
+                        onclick='prepararEdicion(${JSON.stringify(producto)})'>
+                        ✏️
+                        </button>
 
-        </div>
+                    </div>
 
-    </div>
+                </div>
 
-</div>
-`;
+            </div>
+            `;
 
-    // 🔥 ESTA LÍNEA ES LA QUE TE FALTABA
-    lista.appendChild(card);
-});
+            lista.appendChild(card);
+        });
+
     } catch (error) {
         console.error("Error cargando productos:", error);
     }
@@ -99,7 +105,7 @@ form.addEventListener("submit", async (e) => {
 
     const inputImagen = document.getElementById("imagen");
     if (inputImagen.files[0]) {
-        formData.append("imagen", inputImagen.files[0]); // Nota: Asegúrate que el backend espere "image" o "imagen"
+        formData.append("imagen", inputImagen.files[0]);
     }
 
     try {
@@ -107,7 +113,6 @@ form.addEventListener("submit", async (e) => {
         let metodo = "POST";
 
         if (productoEditandoId) {
-            // Modo Edición
             url = `https://proyecto-tienda-rho.vercel.app/api/productos/update/${productoEditandoId}`;
             metodo = "PUT";
         }
@@ -125,6 +130,7 @@ form.addEventListener("submit", async (e) => {
         } else {
             alert("Hubo un error al procesar la solicitud.");
         }
+
     } catch (error) {
         console.error("Error en la operación:", error);
     }
@@ -142,8 +148,7 @@ function prepararEdicion(producto) {
     document.getElementById("stock").value = producto.stock;
     document.getElementById("category").value = producto.category || "";
 
-    // Opcional: Hacer scroll hacia el formulario para que el usuario sepa que puede editar
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // =============================
@@ -160,12 +165,15 @@ async function eliminarProducto(id) {
 
         if (respuesta.ok) {
             alert("Producto eliminado con éxito");
-            cargarProductos(); // Recargar la lista automáticamente
+            cargarProductos();
         }
+
     } catch (error) {
         console.error("Error al eliminar:", error);
     }
 }
 
-// ¡Ejecutar carga inicial!
+// =============================
+// INICIALIZACIÓN
+// =============================
 cargarProductos();
