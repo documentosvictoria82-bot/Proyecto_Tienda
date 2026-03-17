@@ -70,9 +70,15 @@ const CrearUnProducto = async (req, res) => {
             price,
             stock,
             category,
-            image: req.file ? `/uploads/${req.file.filename}` : ""
+
+            // ❌ ANTES (LOCAL)
+            // image: req.file ? `/uploads/${req.file.filename}` : ""
+
+            // ✅ AHORA (CLOUDINARY)
+            image: req.file ? req.file.path : ""
         });
 
+        console.log("ARCHIVO SUBIDO:", req.file); // 👈 DEBUG CLAVE
         console.log("PRODUCTO A GUARDAR:", nuevoProducto);
 
         await nuevoProducto.save();
