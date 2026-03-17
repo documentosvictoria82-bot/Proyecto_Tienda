@@ -49,9 +49,13 @@ async function cargarProductos() {
                         ${producto.name}
                     </h6>
 
-                    <p class="small text-muted mb-2 descripcion">
-                        ${producto.description || ""}
-                    </p>
+<p class="small text-muted mb-1 descripcion">
+    ${producto.description || ""}
+</p>
+
+<button class="btn btn-link p-0 ver-mas" onclick="toggleDescripcion(this)">
+    Ver más
+</button>
 
                     <p class="fw-bold text-success mb-1">
                         $${Number(producto.price).toLocaleString()}
@@ -170,6 +174,18 @@ async function eliminarProducto(id) {
 
     } catch (error) {
         console.error("Error al eliminar:", error);
+    }
+}
+
+function toggleDescripcion(btn) {
+    const descripcion = btn.previousElementSibling;
+
+    descripcion.classList.toggle("expandida");
+
+    if (descripcion.classList.contains("expandida")) {
+        btn.textContent = "Ver menos";
+    } else {
+        btn.textContent = "Ver más";
     }
 }
 
