@@ -309,6 +309,18 @@ toast.classList.remove("mostrar")
 },2000)
 }
 
+// VACIAR CARRITO
+window.vaciarCarrito = function () {
+    carrito = []; // vacía el array
+
+    guardarCarrito(); // guarda vacío en localStorage
+    actualizarContador(); // actualiza número
+    renderCarrito(); // actualiza UI
+
+    console.log("Carrito vaciado correctamente 🧹");
+};
+
+
 // INIT
 obtenerProductos()
 actualizarContador()
