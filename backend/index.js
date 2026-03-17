@@ -16,6 +16,9 @@ const PORT = process.env.PORT || 3000
 conectar()
 
 server.use(express.json());
+server.use(express.static(path.join (__dirname, '../Frontend')))
+
+//guardar imagenes en carpeta uploads
 server.use('/uploads', express.static(path.join(__dirname, 'public/uploads')))
 console.log(path.join (__dirname, 'public'))
 
@@ -34,5 +37,13 @@ process.on('SIGINT', async () => {
     console.log("Servidor cerrado correctamente.");
     process.exit(0);
 });
+
+server.get("/", (req, res) =>{
+        const indexpath = path.join(__dirname, "../Frontend/pages/index.html")
+        res.sendFile(indexpath)
+        // res.sendFile(path.join(publicPath, '../../public/index.html'))
+        // res.sendFile(path.join(__dirname, "../public/index.html"))
+        console.log("se muestra el archivo:", indexpath)
+    })
 
 module.exports = server;
