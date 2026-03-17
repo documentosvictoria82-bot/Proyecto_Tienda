@@ -329,6 +329,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const filtroPrecio = document.getElementById("filtroPrecio");
+    const precioValor = document.getElementById("precioValor");
+
+    if (filtroPrecio && precioValor) {
+
+        // valor inicial
+        precioValor.innerText = filtroPrecio.value;
+
+        filtroPrecio.addEventListener("input", () => {
+
+            const maxPrecio = Number(filtroPrecio.value);
+
+            // mostrar valor en pantalla
+            precioValor.innerText = maxPrecio;
+
+            // filtrar productos
+            const filtrados = todosLosProductos.filter(producto =>
+                Number(producto.price) <= maxPrecio
+            );
+
+            mostrarProductos(filtrados);
+        });
+    }
+});
+
 
 // INIT
 obtenerProductos()
