@@ -162,9 +162,9 @@ if (req.file) {
 }
 
         // ✅ SOLO ESTO (sin fs.unlink)
-        if (req.file) {
-            datosActualizados.image = `/uploads/${req.file.filename}`;
-        }
+if (req.file) {
+    datosActualizados.image = `/uploads/${req.file.filename}`;
+}
 
         const productoActualizado = await Product.findByIdAndUpdate(
             id,

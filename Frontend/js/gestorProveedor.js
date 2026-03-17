@@ -40,10 +40,13 @@ card.classList.add("producto-card");
 
 
 // imagen del producto
-const imagen = producto.image
-? `https://proyecto-tienda-rho.vercel.app${producto.image}`
-: "https://via.placeholder.com/300";
+const BASE = "https://proyecto-tienda-rho.vercel.app";
 
+const imagen = producto.image
+    ? (producto.image.startsWith("http")
+        ? producto.image
+        : BASE + producto.image)
+    : "https://via.placeholder.com/300";
 
 // contenido de la tarjeta
 card.innerHTML = `
