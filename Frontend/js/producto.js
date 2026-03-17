@@ -1,12 +1,6 @@
-// =============================
-// URL DE LA API DEL BACKEND
-// =============================
 const API = "https://proyecto-tienda-rho.vercel.app/api/productos"
 
-
-// =============================
 // VARIABLES GLOBALES
-// =============================
 
 // guardará todos los productos para filtros y buscador
 let todosLosProductos = []
@@ -14,9 +8,9 @@ let todosLosProductos = []
 // carrito guardado en el navegador
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []
 
-// =============================
-// ⭐ GENERAR ESTRELLAS
-// =============================
+
+// GENERAR ESTRELLAS
+
 function generarEstrellas(rating){
 
 let estrellas = ""
@@ -84,9 +78,8 @@ console.log("Error calificando producto:", error)
 
 }
 
-// =============================
-// 1️⃣ OBTENER PRODUCTOS DESDE EL BACKEND
-// =============================
+// OBTENER PRODUCTOS DESDE EL BACKEND
+
 async function obtenerProductos(){
 
 try{
@@ -112,12 +105,8 @@ console.log("Error cargando productos:", error)
 
 }
 
+// MOSTRAR PRODUCTOS EN LA TIENDA
 
-
-
-// =============================
-// 2️⃣ MOSTRAR PRODUCTOS EN LA TIENDA
-// =============================
 function mostrarProductos(productos){
 
 const contenedor = document.getElementById("productos")
