@@ -133,7 +133,7 @@ const estrellas = generarEstrellas(producto.rating?.rate || 0)
 
 // obtener imagen
 const imagen = producto.image
-? "http://localhost:3007" + producto.image
+? "https://proyecto-tienda-rho.vercel.app" + producto.image
 : "https://via.placeholder.com/300"
 
 // crear tarjeta del producto
@@ -424,7 +424,7 @@ const div = document.createElement("div")
 div.classList.add("item-carrito")
 
 const imagen = producto.image
-? `http://localhost:3007${producto.image}`
+? `https://proyecto-tienda-rho.vercel.app${producto.image}`
 : "https://via.placeholder.com/300";
 
 
