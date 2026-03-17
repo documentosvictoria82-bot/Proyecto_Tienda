@@ -41,7 +41,7 @@ card.classList.add("producto-card");
 
 // imagen del producto
 const imagen = producto.image
-? `http://proyecto-tienda-rho.vercel.app${producto.image}`
+? `https://proyecto-tienda-rho.vercel.app${producto.image}`
 : "https://via.placeholder.com/300";
 
 
