@@ -1,9 +1,10 @@
 const cloudinary = require("cloudinary").v2;
 
+// CONFIGURACIÓN SEGURA (PRODUCCIÓN)
 cloudinary.config({
-  cloud_name: "dhboszpzi",
-  api_key: "187753996817882",
-  api_secret: "aZRznTb-6NDow2Q3HWUENRuFjjU"
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 module.exports = cloudinary;
