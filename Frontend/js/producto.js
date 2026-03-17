@@ -308,6 +308,28 @@ renderCarrito()
 console.log("Carrito vaciado 🧹")
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const selectOrdenar = document.getElementById("ordenarPrecio");
+
+    if (selectOrdenar) {
+        selectOrdenar.addEventListener("change", () => {
+
+            let productosOrdenados = [...todosLosProductos];
+
+            if (selectOrdenar.value === "menor") {
+                productosOrdenados.sort((a, b) => Number(a.price) - Number(b.price));
+            }
+
+            if (selectOrdenar.value === "mayor") {
+                productosOrdenados.sort((a, b) => Number(b.price) - Number(a.price));
+            }
+
+            mostrarProductos(productosOrdenados);
+        });
+    }
+});
+
+
 // INIT
 obtenerProductos()
 actualizarContador()
