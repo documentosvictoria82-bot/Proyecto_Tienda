@@ -81,18 +81,11 @@ contenedor.innerHTML=""
 
 productos.forEach(producto=>{
 
-const estrellas = generarEstrellas(producto.rating?.rate || 0)
-
-// ❌ ANTES (solo backend local)
-// const imagen = producto.image
-// ? "https://proyecto-tienda-rho.vercel.app" + producto.image
-// : "https://via.placeholder.com/300"
-
-// ✅ AHORA (Cloudinary + compatibilidad)
+// ✅ Imagen compatible con Cloudinary
 const imagen = producto.image
   ? producto.image.startsWith("http")
-    ? producto.image // Cloudinary
-    : "https://proyecto-tienda-rho.vercel.app" + producto.image // local
+    ? producto.image
+    : "https://proyecto-tienda-rho.vercel.app" + producto.image
   : "https://via.placeholder.com/300";
 
 const card = document.createElement("div")
@@ -250,10 +243,6 @@ carrito.forEach(producto => {
 const div = document.createElement("div")
 div.classList.add("item-carrito")
 
-// ❌ ANTES
-// const imagen = `https://proyecto-tienda-rho.vercel.app${producto.image}`
-
-// ✅ AHORA
 const imagen = producto.image
   ? producto.image.startsWith("http")
     ? producto.image
@@ -309,17 +298,15 @@ toast.classList.remove("mostrar")
 },2000)
 }
 
-// VACIAR CARRITO
+// ✅ NUEVA FUNCIÓN (ARREGLA TU ERROR)
 window.vaciarCarrito = function () {
-    carrito = []; // vacía el array
+carrito = []
+guardarCarrito()
+actualizarContador()
+renderCarrito()
 
-    guardarCarrito(); // guarda vacío en localStorage
-    actualizarContador(); // actualiza número
-    renderCarrito(); // actualiza UI
-
-    console.log("Carrito vaciado correctamente 🧹");
-};
-
+console.log("Carrito vaciado 🧹")
+}
 
 // INIT
 obtenerProductos()
