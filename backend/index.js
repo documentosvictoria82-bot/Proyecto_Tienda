@@ -35,4 +35,12 @@ process.on('SIGINT', async () => {
     process.exit(0);
 });
 
+server.get("/", (req, res) =>{
+        const indexpath = path.join(__dirname + `../Frontend/pages/index.html`)
+        res.sendFile(indexpath)
+        // res.sendFile(path.join(publicPath, '../../public/index.html'))
+        // res.sendFile(path.join(__dirname, "../public/index.html"))
+        //console.log("se muestra el archivo:", indexpath)
+    })
+
 module.exports = server;
