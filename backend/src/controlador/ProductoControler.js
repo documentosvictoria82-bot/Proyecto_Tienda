@@ -145,13 +145,21 @@ const ModificarProducto = async (req, res) => {
             });
         }
 
- const datosActualizados = {
-    name: req.body.name,
-    description: req.body.description,
-    price: Number(req.body.price),
-    stock: Number(req.body.stock),
-    category: req.body.category
-};
+const datosActualizados = {};
+
+// solo agregar si vienen datos
+if (req.body.name) datosActualizados.name = req.body.name;
+if (req.body.description) datosActualizados.description = req.body.description;
+if (req.body.category) datosActualizados.category = req.body.category;
+
+// números seguros
+if (req.body.price) datosActualizados.price = Number(req.body.price);
+if (req.body.stock) datosActualizados.stock = Number(req.body.stock);
+
+// imagen
+if (req.file) {
+    datosActualizados.image = `/uploads/${req.file.filename}`;
+}
 
         // ✅ SOLO ESTO (sin fs.unlink)
         if (req.file) {
