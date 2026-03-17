@@ -169,8 +169,8 @@ if (req.body.stock !== undefined) {
 
 // imagen
 // ✅ seguro en Vercel
-if (req.file && req.file.filename) {
-    datosActualizados.image = `/uploads/${req.file.filename}`;
+if (req.file) {
+    datosActualizados.image = req.file.path;
 }
 
 
