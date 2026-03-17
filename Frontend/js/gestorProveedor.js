@@ -32,7 +32,7 @@ async function cargarProductos() {
 
             // Lógica de la imagen
             const BASE = "https://proyecto-tienda-rho.vercel.app";
-            const imagenUrl = (producto.image && producto.image !== "undefined")
+            const imagenUrl = producto.image
                 ? (producto.image.startsWith("http") ? producto.image : BASE + producto.image)
                 : "https://via.placeholder.com/300";
 
