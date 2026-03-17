@@ -110,3 +110,23 @@ button {
 button:hover {
     transform: scale(1.03);
 }
+
+/* 🔥 ARREGLA TEXTO ROTO */
+.card h6,
+.card p {
+    word-break: normal !important;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+/* 🔥 ASEGURA ANCHO CORRECTO */
+#listaProductos .col-12,
+#listaProductos .col-sm-6,
+#listaProductos .col-md-4,
+#listaProductos .col-lg-3 {
+    min-width: 250px;
+}
+
+.card-body {
+    min-height: 180px;
+}
