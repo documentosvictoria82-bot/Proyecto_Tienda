@@ -126,8 +126,8 @@ formData.append("category",document.getElementById("category").value);
 
 const imagen = document.getElementById("imagen").files[0];
 
-if(imagen){
-formData.append("imagen",imagen);
+if(imagen && !productoEditandoId){
+    formData.append("imagen",imagen);
 }
 
 try{
