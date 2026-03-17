@@ -133,12 +133,10 @@ error:error.message
 
 // Modificar un producto
 const ModificarProducto = async (req, res) => {
-
     try {
 
         const { id } = req.params;
 
-        // Buscar el producto actual
         const producto = await Product.findById(id);
 
         if (!producto) {
@@ -155,23 +153,8 @@ const ModificarProducto = async (req, res) => {
             category: req.body.category
         };
 
-        // Si se sube una nueva imagen
+        // ✅ SOLO ESTO (sin fs.unlink)
         if (req.file) {
-
-            // Eliminar imagen anterior si existe
-            if (producto.image) {
-
-                const rutaImagen = path.join(__dirname, "../../public", producto.image);
-
-                fs.unlink(rutaImagen, (err) => {
-                    if (err) {
-                        console.log("No se pudo eliminar la imagen anterior:", err);
-                    }
-                });
-
-            }
-
-            // Guardar nueva imagen
             datosActualizados.image = `/uploads/${req.file.filename}`;
         }
 
@@ -188,10 +171,11 @@ const ModificarProducto = async (req, res) => {
 
     } catch (error) {
 
-        console.error(error);
+        console.error("ERROR REAL:", error); // 👈 déjalo para debug
 
         res.status(500).json({
-            mensaje: "Error al actualizar el producto"
+            mensaje: "Error al actualizar el producto",
+            error: error.message // 👈 esto te ayuda mucho
         });
 
     }

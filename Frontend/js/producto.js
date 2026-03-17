@@ -93,15 +93,16 @@ try{
 
 // llamamos la API
 const response = await fetch(API)
+const data = await response.json()
 
-// convertimos la respuesta a JSON
-const productos = await response.json()
+// 👇 VALIDACIÓN CLAVE
+if(!Array.isArray(data)){
+    console.log("Error del backend:", data)
+    return
+}
 
-// guardamos todos los productos
-todosLosProductos = productos
-
-// mostramos los productos en pantalla
-mostrarProductos(productos)
+todosLosProductos = data
+mostrarProductos(data)
 
 }catch(error){
 
