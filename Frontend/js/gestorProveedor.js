@@ -195,7 +195,7 @@ await fetch(`https://proyecto-tienda-rho.vercel.app/api/productos/delete/${id}`,
 method:"DELETE"
 });
 
-cargarProductos();
+// cargarProductos();
 
 }
 
