@@ -132,7 +132,7 @@ try{
 if(productoEditandoId){
 
 // ✏️ ACTUALIZAR PRODUCTO
-await fetch(`http://proyecto-tienda-rho.vercel.app/api/productos/update/${productoEditandoId}`,{
+await fetch(`https://proyecto-tienda-rho.vercel.app/api/productos/update/${productoEditandoId}`,{
 method:"PUT",
 body:formData
 });
@@ -142,7 +142,7 @@ productoEditandoId=null;
 }else{
 
 // ➕ CREAR PRODUCTO
-await fetch("http://proyecto-tienda-rho.vercel.app/api/productos",{
+await fetch("https://proyecto-tienda-rho.vercel.app/api/productos",{
 method:"POST",
 body:formData
 });
