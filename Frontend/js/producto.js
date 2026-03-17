@@ -424,7 +424,7 @@ const div = document.createElement("div")
 div.classList.add("item-carrito")
 
 const imagen = producto.image
-? `https://proyecto-tienda-rho.vercel.app${producto.image}`
+? `http://proyecto-tienda-rho.vercel.app${producto.image}`
 : "https://via.placeholder.com/300";
 
 
@@ -655,7 +655,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Sesión cerrada correctamente. ¡Vuelve pronto!");
 
             // 2. Redirigimos al inicio y recargamos la página
-            window.location.href = "index.html"; 
+            window.location.href = "http://proyecto-tienda-rho.vercel.app"; 
         });
     }
 });
