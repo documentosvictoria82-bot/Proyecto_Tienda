@@ -33,7 +33,7 @@ if (response.ok) {
     if (data.role === 'admin') {
         window.location.href = "../pages/creacionProducto.html";
     } else {
-        window.location.href = "./index.html";
+        window.location.href = "index.html";
     }
 } else {
     alert(data.error);
