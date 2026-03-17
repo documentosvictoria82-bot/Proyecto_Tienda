@@ -355,6 +355,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+window.finalizarCompra = function () {
+
+    if(carrito.length === 0){
+        alert("Tu carrito está vacío 🛒");
+        return;
+    }
+
+    alert("✅ Compra realizada con éxito 🎉\n\nGracias por tu compra.");
+
+    // limpiar carrito
+    carrito = [];
+    guardarCarrito();
+    actualizarContador();
+    renderCarrito();
+};
+
 
 // INIT
 obtenerProductos()
