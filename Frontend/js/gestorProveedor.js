@@ -82,7 +82,7 @@ form.addEventListener("submit", async (e) => {
 
     const inputImagen = document.getElementById("imagen");
     if (inputImagen.files[0]) {
-        formData.append("image", inputImagen.files[0]); // Nota: Asegúrate que el backend espere "image" o "imagen"
+        formData.append("imagen", inputImagen.files[0]); // Nota: Asegúrate que el backend espere "image" o "imagen"
     }
 
     try {
