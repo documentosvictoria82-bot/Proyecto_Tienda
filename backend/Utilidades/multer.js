@@ -1,7 +1,7 @@
 const multer = require('multer');
 const path = require('path');   
 
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage({
     destination: function (req, file, cb) {
         // Asegúrate de que esta carpeta existe: backend/public/uploads/
         cb(null, path.join(__dirname, '../public/uploads/'));
