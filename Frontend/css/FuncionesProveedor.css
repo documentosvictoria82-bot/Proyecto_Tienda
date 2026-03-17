@@ -207,3 +207,11 @@ background:#21618c;
     transform: translateY(-5px);
     transition: 0.3s;
 }
+
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}

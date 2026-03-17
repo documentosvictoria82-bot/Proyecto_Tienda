@@ -34,44 +34,47 @@ productos.forEach(producto => {
         ? (producto.image.startsWith("http") ? producto.image : BASE + producto.image)
         : "https://via.placeholder.com/300";
 
-    card.className = "col-md-4";
+    card.className = "col-12 col-sm-6 col-md-4 col-lg-3";
 
-    card.innerHTML = `
-    <div class="card h-100 shadow-sm border-0 rounded-4">
+card.innerHTML = `
+<div class="card h-100 shadow-sm border-0 rounded-4">
 
-        <img src="${imagenUrl}" class="card-img-top p-3" style="height:180px; object-fit:contain;">
+    <img src="${imagenUrl}" 
+    class="card-img-top bg-light"
+    style="height:200px; object-fit:contain; padding:10px;">
 
-        <div class="card-body d-flex flex-column">
+    <div class="card-body d-flex flex-column">
 
-            <h5 class="card-title">${producto.name}</h5>
+        <h6 class="fw-bold">${producto.name}</h6>
 
-            <p class="card-text small text-muted">
-                ${producto.description || ""}
-            </p>
+        <p class="small text-muted mb-1" style="min-height:40px;">
+            ${producto.description || ""}
+        </p>
 
-            <p class="fw-bold text-success">$${producto.price}</p>
-            <p class="text-muted small">Stock: ${producto.stock}</p>
+        <p class="fw-bold text-success mb-1">$${producto.price}</p>
 
-            <div class="mt-auto d-flex gap-2">
+        <p class="text-muted small">Stock: ${producto.stock}</p>
 
-                <button 
-                class="btn btn-outline-danger w-50"
-                onclick="eliminarProducto('${producto._id}')">
-                🗑 Eliminar
-                </button>
+        <div class="mt-auto d-flex gap-2">
 
-                <button 
-                class="btn btn-dark w-50"
-                onclick='prepararEdicion(${JSON.stringify(producto)})'>
-                ✏️ Editar
-                </button>
+            <button 
+            class="btn btn-outline-danger w-50 btn-sm"
+            onclick="eliminarProducto('${producto._id}')">
+            🗑
+            </button>
 
-            </div>
+            <button 
+            class="btn btn-dark w-50 btn-sm"
+            onclick='prepararEdicion(${JSON.stringify(producto)})'>
+            ✏️
+            </button>
 
         </div>
 
     </div>
-    `;
+
+</div>
+`;
 
     // 🔥 ESTA LÍNEA ES LA QUE TE FALTABA
     lista.appendChild(card);
