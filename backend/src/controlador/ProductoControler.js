@@ -153,18 +153,19 @@ if (req.body.description) datosActualizados.description = req.body.description;
 if (req.body.category) datosActualizados.category = req.body.category;
 
 // números seguros
-if (req.body.price) datosActualizados.price = Number(req.body.price);
-if (req.body.stock) datosActualizados.stock = Number(req.body.stock);
+if (req.body.price !== undefined) {
+    datosActualizados.price = Number(req.body.price);
+}
+
+if (req.body.stock !== undefined) {
+    datosActualizados.stock = Number(req.body.stock);
+}
 
 // imagen
 if (req.file) {
     datosActualizados.image = `/uploads/${req.file.filename}`;
 }
 
-        // ✅ SOLO ESTO (sin fs.unlink)
-if (req.file) {
-    datosActualizados.image = `/uploads/${req.file.filename}`;
-}
 
         const productoActualizado = await Product.findByIdAndUpdate(
             id,
