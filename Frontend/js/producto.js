@@ -4,7 +4,7 @@ const API = "https://proyecto-tienda-rho.vercel.app/api/productos"
 let todosLosProductos = []
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []
 
-// ================= ESTRELLAS =================
+// ESTRELLAS 
 function generarEstrellas(rating){
     let estrellas = ""
     const redondeado = Math.round(rating)
@@ -45,7 +45,7 @@ async function calificarProducto(id, valor){
     }
 }
 
-// ================= PRODUCTOS =================
+//  PRODUCTOS
 async function obtenerProductos(){
     try{
         const response = await fetch(API)
@@ -76,17 +76,17 @@ function mostrarProductos(productos){
         ? producto.image.startsWith("http")
             ? producto.image
             : "https://proyecto-tienda-rho.vercel.app" + producto.image
-        : "https://via.placeholder.com/300"
+            : "https://via.placeholder.com/300"
 
         const card = document.createElement("div")
-        card.classList.add("col-md-4","col-lg-3")
+            card.classList.add("col-md-4","col-lg-3")
 
-        card.innerHTML = `
-        <div class="card card-producto h-100">
-            <img src="${imagen}" class="card-img-top">
+            card.innerHTML = `
+                 <div class="card card-producto h-100">
+                <img src="${imagen}" class="card-img-top">
 
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">${producto.name}</h5>
+                 <div class="card-body d-flex flex-column">
+                     <h5 class="card-title">${producto.name}</h5>
 
                 <p class="card-text descripcion">
                     ${producto.description || ""}
@@ -116,7 +116,7 @@ function mostrarProductos(productos){
     })
 }
 
-// ================= CARRITO =================
+//  CARRITO 
 function agregarCarrito(id){
     const producto = todosLosProductos.find(p=>p._id === id)
     const existe = carrito.find(p=>p._id === id)
@@ -186,12 +186,12 @@ function renderCarrito(){
         ? producto.image.startsWith("http")
             ? producto.image
             : "https://proyecto-tienda-rho.vercel.app" + producto.image
-        : "https://via.placeholder.com/300"
+            : "https://via.placeholder.com/300"
 
-        const subtotal = producto.price * producto.cantidad
+    const subtotal = producto.price * producto.cantidad
         total += subtotal
 
-        const div = document.createElement("div")
+    const div = document.createElement("div")
         div.classList.add("item-carrito")
 
         div.innerHTML = `
@@ -220,7 +220,7 @@ function renderCarrito(){
     lista.innerHTML += `<hr><h5>Total: $${total}</h5>`
 }
 
-// ================= 🔐 SESIÓN =================
+//  SESIÓN 
 function cerrarSesion(){
     localStorage.removeItem("token")
     localStorage.removeItem("role")
@@ -230,7 +230,7 @@ function cerrarSesion(){
     window.location.href = "/index.html"
 }
 
-// ================= DOM READY =================
+//  DOM READY 
 document.addEventListener("DOMContentLoaded", () => {
 
     const token = localStorage.getItem("token")
@@ -248,7 +248,7 @@ if(token){
     if(linkRegistro) linkRegistro.style.display = "none"
 }
 
-    // 🔥 CONEXIÓN DEL BOTÓN (LO IMPORTANTE)
+    // CONEXIÓN DEL BOTÓN (LO IMPORTANTE)
     if(btnCerrarSesion){
         btnCerrarSesion.addEventListener("click", cerrarSesion)
     }
@@ -258,7 +258,7 @@ if(token){
     renderCarrito()
 })
 
-// ================= ACCIONES CARRITO =================
+//  ACCIONES CARRITO 
 function vaciarCarrito(){
     carrito = []
     guardarCarrito()
@@ -324,17 +324,17 @@ function confirmarCompra(){
     cerrarModal()
 }
 
-// ================= UTILIDADES =================
+//  UTILIDADES 
 function guardarCarrito(){
     localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
 function mostrarToast(){
     const toast = document.getElementById("toastCarrito")
-    if(!toast) return
+        if(!toast) return
 
     toast.textContent = "🛒 Producto agregado al carrito"
-    toast.classList.add("mostrar")
+        toast.classList.add("mostrar")
 
     setTimeout(()=>{
         toast.classList.remove("mostrar")
@@ -343,13 +343,13 @@ function mostrarToast(){
 
 function toggleDescripcion(btn){
     const descripcion = btn.previousElementSibling
-    descripcion.classList.toggle("expandida")
-    btn.textContent = descripcion.classList.contains("expandida") 
-        ? "Ver menos" 
-        : "Ver más"
+        descripcion.classList.toggle("expandida")
+         btn.textContent = descripcion.classList.contains("expandida") 
+         ? "Ver menos" 
+         : "Ver más"
 }
 
-// ================= GLOBALES (CLAVE PARA QUE FUNCIONE TODO) =================
+//  GLOBALES (CLAVE PARA QUE FUNCIONE TODO) 
 window.agregarCarrito = agregarCarrito
 window.vaciarCarrito = vaciarCarrito
 window.finalizarCompra = finalizarCompra
