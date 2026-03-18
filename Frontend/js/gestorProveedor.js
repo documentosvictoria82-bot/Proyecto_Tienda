@@ -1,22 +1,22 @@
-// =============================
+
 // ELEMENTOS DEL DOM Y SEGURIDAD
-// =============================
+
 
 const rolActual = localStorage.getItem("role");
 
 // Verificación de Administrador
-if (!rolActual || rolActual.toLowerCase() !== 'admin') {
+    if (!rolActual || rolActual.toLowerCase() !== 'admin') {
     alert("Acceso denegado: No tienes permisos de administrador.");
     window.location.href = "login.html";
-}
+    }
 
-const form = document.getElementById("formProducto");
-const lista = document.getElementById("listaProductos");
-let productoEditandoId = null;
+    const form = document.getElementById("formProducto");
+    const lista = document.getElementById("listaProductos");
+        let productoEditandoId = null;
 
-// =============================
-// 1️⃣ CARGAR PRODUCTOS
-// =============================
+
+// CARGAR PRODUCTOS
+
 async function cargarProductos() {
     try {
         const respuesta = await fetch("https://proyecto-tienda-rho.vercel.app/api/productos");
@@ -33,7 +33,7 @@ async function cargarProductos() {
                 ? (producto.image.startsWith("http") ? producto.image : BASE + producto.image)
                 : "https://via.placeholder.com/300";
 
-            // 🔥 GRID CORRECTO + FLEX
+            //  GRID y FLEX
             card.className = "col-12 col-sm-6 col-md-4 col-lg-3 d-flex";
 
             card.innerHTML = `
@@ -43,41 +43,41 @@ async function cargarProductos() {
                 class="card-img-top bg-light"
                 style="height:200px; object-fit:contain; padding:10px;">
 
-                <div class="card-body d-flex flex-column">
+            <div class="card-body d-flex flex-column">
 
                     <h6 class="fw-bold text-truncate">
                         ${producto.name}
                     </h6>
 
-<p class="small text-muted mb-1 descripcion">
-    ${producto.description || ""}
-</p>
+                <p class="small text-muted mb-1 descripcion">
+                    ${producto.description || ""}
+                </p>
 
-<button class="btn btn-link p-0 ver-mas" onclick="toggleDescripcion(this)">
-    Ver más
-</button>
+                <button class="btn btn-link p-0 ver-mas" onclick="toggleDescripcion(this)">
+                     Ver más
+                </button>
 
-                    <p class="fw-bold text-success mb-1">
+                 <p class="fw-bold text-success mb-1">
                         $${Number(producto.price).toLocaleString()}
-                    </p>
+                 </p>
 
-                    <p class="text-muted small mb-2">
+                 <p class="text-muted small mb-2">
                         Stock: ${producto.stock}
-                    </p>
+                 </p>
 
-                    <div class="mt-auto d-flex gap-2">
+             <div class="mt-auto d-flex gap-2">
 
-                        <button 
-                        class="btn btn-outline-danger w-50 btn-sm"
-                        onclick="eliminarProducto('${producto._id}')">
+                 <button 
+                    class="btn btn-outline-danger w-50 btn-sm"
+                    onclick="eliminarProducto('${producto._id}')">
                         🗑
-                        </button>
+                 </button>
 
-                        <button 
-                        class="btn btn-dark w-50 btn-sm"
-                        onclick='prepararEdicion(${JSON.stringify(producto)})'>
+                 <button 
+                    class="btn btn-dark w-50 btn-sm"
+                    onclick='prepararEdicion(${JSON.stringify(producto)})'>
                         ✏️
-                        </button>
+                    </button>
 
                     </div>
 
@@ -94,9 +94,9 @@ async function cargarProductos() {
     }
 }
 
-// =============================
-// 2️⃣ CREAR O ACTUALIZAR PRODUCTO
-// =============================
+
+// CREAR O ACTUALIZAR PRODUCTO
+
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -126,12 +126,12 @@ form.addEventListener("submit", async (e) => {
             body: formData
         });
 
-        if (respuesta.ok) {
+    if (respuesta.ok) {
             alert(productoEditandoId ? "Producto actualizado" : "Producto creado");
             productoEditandoId = null;
             form.reset();
             cargarProductos();
-        } else {
+     } else {
             alert("Hubo un error al procesar la solicitud.");
         }
 
@@ -140,24 +140,24 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
-// =============================
-// 3️⃣ PREPARAR EDICIÓN
-// =============================
-function prepararEdicion(producto) {
-    productoEditandoId = producto._id;
 
-    document.getElementById("name").value = producto.name;
-    document.getElementById("description").value = producto.description;
-    document.getElementById("price").value = producto.price;
-    document.getElementById("stock").value = producto.stock;
-    document.getElementById("category").value = producto.category || "";
+    // PREPARAR EDICIÓN
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
+    function prepararEdicion(producto) {
+        productoEditandoId = producto._id;
 
-// =============================
-// 4️⃣ ELIMINAR PRODUCTO
-// =============================
+        document.getElementById("name").value = producto.name;
+        document.getElementById("description").value = producto.description;
+        document.getElementById("price").value = producto.price;
+        document.getElementById("stock").value = producto.stock;
+        document.getElementById("category").value = producto.category || "";
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+
+// ELIMINAR PRODUCTO
+
 async function eliminarProducto(id) {
     const confirmar = confirm("¿Estás seguro de eliminar este producto?");
     if (!confirmar) return;
@@ -177,6 +177,8 @@ async function eliminarProducto(id) {
     }
 }
 
+// DESCRIPCIÓN EXPANDIBLE
+
 function toggleDescripcion(btn) {
     const descripcion = btn.previousElementSibling;
 
@@ -189,7 +191,7 @@ function toggleDescripcion(btn) {
     }
 }
 
-// =============================
+
 // INICIALIZACIÓN
-// =============================
+
 cargarProductos();

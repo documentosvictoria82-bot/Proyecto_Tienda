@@ -320,7 +320,6 @@ if (botonCerrar) {
         window.location.href = "index.html"; // Redirige y refresca
     });
 }
-
 // Ejecutamos la función apenas cargue el script
 gestionarNavbar();
 
@@ -339,7 +338,7 @@ toast.classList.remove("mostrar")
 },2000)
 }
 
-// ✅ NUEVA FUNCIÓN (ARREGLA TU ERROR)
+// NUEVA FUNCIÓN (ARREGLA TU ERROR)
 window.vaciarCarrito = function () {
 carrito = []
 guardarCarrito()
