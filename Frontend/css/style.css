@@ -572,3 +572,14 @@ body.dark-mode select {
 * {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* ASEGURAR QUE LOS BOTONES SEAN CLICKEABLES */
+.categorias {
+    position: relative;
+    z-index: 10;
+}
+
+.categoria {
+    cursor: pointer;
+    pointer-events: auto;
+}

@@ -264,6 +264,30 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+    // ===== FILTRO CATEGORÍAS =====
+    const botonesCategorias = document.querySelectorAll(".categoria")
+
+    botonesCategorias.forEach(btn => {
+        btn.addEventListener("click", () => {
+
+            // estilo activo (PRO)
+            botonesCategorias.forEach(b => b.classList.remove("activa"))
+            btn.classList.add("activa")
+
+            const categoria = btn.dataset.cat
+
+            if(categoria === "todos"){
+                mostrarProductos(todosLosProductos)
+            } else {
+                const filtrados = todosLosProductos.filter(p => 
+                    p.category && p.category.toLowerCase().includes(categoria.toLowerCase())
+                )
+
+                mostrarProductos(filtrados)
+            }
+        })
+    })
+
     // ===== BUSCADOR =====
     const formBuscar = document.getElementById("formBuscar")
     const inputBuscar = document.getElementById("inputBuscar")
