@@ -13,156 +13,156 @@
 
 
 <body>
-    <!-- ================= MODAL CHECKOUT ================= -->
+    <!--  MODAL CHECKOUT  -->
 
 <div id="modalCompra" class="modal-compra">
 
-<div class="modal-contenido">
+    <div class="modal-contenido">
 
-<h3>🧾 Resumen de compra</h3>
+        <h3>🧾 Resumen de compra</h3>
 
-<div id="resumenCompra"></div>
+        <div id="resumenCompra"></div>
 
-<h4 id="totalCompra"></h4>
+            <h4 id="totalCompra"></h4>
 
-<div class="mt-3 d-flex gap-2">
-    <button class="btn btn-success" onclick="confirmarCompra()">
-        Confirmar compra
-    </button>
+            <div class="mt-3 d-flex gap-2">
+                <button class="btn btn-success" onclick="confirmarCompra()">
+                 Confirmar compra
+                </button>
 
-    <button class="btn btn-secondary" onclick="cerrarModal()">
-        Cancelar
-    </button>
-</div>
+                <button class="btn btn-secondary" onclick="cerrarModal()">
+                Cancelar
+                </button>
+            </div>
 
-</div>
-</div>
+        </div>
+    </div>
 
-<!-- ================= NAVBAR ================= -->
+<!-- BARRA DE NAVEGACION (NAVBAR) -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
 
-<a class="navbar-brand" href="#">🛒 Mi Tienda Bootcamps</a>
+        <a class="navbar-brand" href="#">🛒 Mi Tienda Bootcamps</a>
 
-<form class="d-flex me-3" id="formBuscar">
-<input 
-class="form-control me-2" 
-type="search" 
-placeholder="Buscar producto"
-id="inputBuscar">
+    <form class="d-flex me-3" id="formBuscar">
+        <input 
+            class="form-control me-2" 
+            type="search" 
+            placeholder="Buscar producto"
+            id="inputBuscar">
 
-<button type="submit" class="btn btn-outline-light">
-Buscar
-</button>
-</form>
+        <button type="submit" class="btn btn-outline-light">
+        Buscar
+        </button>
+    </form>
 
-<select id="ordenarPrecio" class="form-select w-auto me-3">
-<option value="">Ordenar</option>
-<option value="menor">Precio menor</option>
-<option value="mayor">Precio mayor</option>
-</select>
+    <select id="ordenarPrecio" class="form-select w-auto me-3">
+        <option value="">Ordenar</option>
+        <option value="menor">Precio menor</option>
+        <option value="mayor">Precio mayor</option>
+    </select>
 
-<div class="d-flex align-items-center gap-3">
+        <div class="d-flex align-items-center gap-3">
 
-<button id="toggleTema" class="btn btn-outline-light">
-🌙
-</button>
+            <button id="toggleTema" class="btn btn-outline-light">
+                🌙
+            </button>
 
-<div class="carrito-icono text-white" onclick="toggleCarrito()" style="cursor:pointer;">
-🛒
-<span id="contadorCarrito" class="badge bg-danger">0</span>
-</div>
+            <div class="carrito-icono text-white" onclick="toggleCarrito()" style="cursor:pointer;">
+                🛒
+            <span id="contadorCarrito" class="badge bg-danger">0</span>
+            </div>
 
-<a href="./pages/login.html" class="text-white text-decoration-none">Iniciar Sesión</a>
-<a href="./pages/registro.html" class="text-white text-decoration-none">Registrarse</a>
+        <a href="./pages/login.html" class="text-white text-decoration-none">Iniciar Sesión</a>
+        <a href="./pages/registro.html" class="text-white text-decoration-none">Registrarse</a>
 
-<button 
-id="btnCerrarSesion" 
-class="btn btn-sm btn-danger d-none">
-Cerrar Sesión
-</button>
+            <button 
+                id="btnCerrarSesion" 
+                class="btn btn-sm btn-danger d-none">
+                Cerrar Sesión
+            </button>
 
-</div>
+    </div>
 </div>
 </nav>
 
-<!-- ================= FILTROS ================= -->
+<!--  FILTROS  -->
 
 <div class="container mt-4">
 
-<h5>Categorías</h5>
+    <h5>Categorías</h5>
 
-<div class="categorias">
-<button type="button" class="categoria" data-cat="todos">Todos</button>
-<button type="button" class="categoria" data-cat="portatiles">Portátiles</button>
-<button type="button" class="categoria" data-cat="moviles">Dispositivos Móviles</button>
-<button type="button" class="categoria" data-cat="accesorios">Accesorios</button>
-<button type="button" class="categoria" data-cat="audio">Audio y Video</button>
-<button type="button" class="categoria" data-cat="gaming">Gaming</button>
-<button type="button" class="categoria" data-cat="electrodomesticos">Electrodomésticos</button>
-</div>
+    <div class="categorias">
+        <button type="button" class="categoria" data-cat="todos">Todos</button>
+        <button type="button" class="categoria" data-cat="portatiles">Portátiles</button>
+        <button type="button" class="categoria" data-cat="moviles">Dispositivos Móviles</button>
+        <button type="button" class="categoria" data-cat="accesorios">Accesorios</button>
+        <button type="button" class="categoria" data-cat="audio">Audio y Video</button>
+        <button type="button" class="categoria" data-cat="gaming">Gaming</button>
+        <button type="button" class="categoria" data-cat="electrodomesticos">Electrodomésticos</button>
+    </div>
 
-<br>
+    <br>
 
-<h6>Filtrar por precio</h6>
+    <h6>Filtrar por precio</h6>
 
 <input 
-type="range"
-min="0"
-max="200000000"
-step="50"
-id="filtroPrecio"
-class="form-range">
+    type="range"
+    min="0"
+    max="200000000"
+    step="50"
+    id="filtroPrecio"
+    class="form-range">
 
-<p>Precio máximo: $<span id="precioValor">200000000</span></p>
+        <p>Precio máximo: $<span id="precioValor">200000000</span></p>
 
 </div>
 
-<!-- ================= PRODUCTOS ================= -->
+<!--  PRODUCTOS  -->
 
 <div class="container mt-5">
 
-<h2 class="text-center mb-4">Nuestros Productos</h2>
+    <h2 class="text-center mb-4">Nuestros Productos</h2>
 
-<div id="productos" class="row g-4"></div>
+    <div id="productos" class="row g-4"></div>
 
-</div>
+    </div>
 
-<!-- ================= PANEL CARRITO ================= -->
+<!-- PANEL CARRITO  -->
 
-<div id="panelCarrito" class="panel-carrito">
+    <div id="panelCarrito" class="panel-carrito">
 
-<div class="carrito-header d-flex justify-content-between align-items-center">
-<h4>🛒 Carrito</h4>
-<button type="button" class="btn btn-sm btn-dark" onclick="toggleCarrito()">✖</button>
-</div>
+        <div class="carrito-header d-flex justify-content-between align-items-center">
+            <h4>🛒 Carrito</h4>
+            <button type="button" class="btn btn-sm btn-dark" onclick="toggleCarrito()">✖</button>
+    </div>
 
-<div id="listaCarrito"></div>
+    <div id="listaCarrito"></div>
 
-<button 
-type="button"
-class="btn btn-outline-dark w-100 mt-2"
-onclick="vaciarCarrito()">
-🗑 Vaciar carrito
-</button>
+        <button 
+            type="button"
+            class="btn btn-outline-dark w-100 mt-2"
+            onclick="vaciarCarrito()">
+                🗑 Vaciar carrito
+        </button>
 
-<button 
-type="button"
-class="btn btn-dark w-100 mt-3"
-onclick="finalizarCompra()">
-Finalizar compra
-</button>
+        <button 
+            type="button"
+            class="btn btn-dark w-100 mt-3"
+            onclick="finalizarCompra()">
+            Finalizar compra
+        </button>
 
-</div>
+    </div>
 
-<!-- ================= TOAST ================= -->
+<!-- TOAST  -->
 
 <div id="toastCarrito" class="toast-carrito">
-Producto agregado al carrito 🛒
+    Producto agregado al carrito 🛒
 </div>
 
-<!-- ================= SCRIPTS ================= -->
+<!-- SCRIPTS  -->
 
 <script src="./js/producto.js" defer></script>
 
