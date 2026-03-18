@@ -11,6 +11,32 @@
 <link rel="stylesheet" href="./css/style.css">
 </head>
 
+
+<!-- ================= MODAL CHECKOUT ================= -->
+
+<div id="modalCompra" class="modal-compra">
+
+<div class="modal-contenido">
+
+<h3>🧾 Resumen de compra</h3>
+
+<div id="resumenCompra"></div>
+
+<h4 id="totalCompra"></h4>
+
+<div class="mt-3 d-flex gap-2">
+    <button class="btn btn-success" onclick="confirmarCompra()">
+        Confirmar compra
+    </button>
+
+    <button class="btn btn-secondary" onclick="cerrarModal()">
+        Cancelar
+    </button>
+</div>
+
+</div>
+</div>
+
 <body>
 
 <!-- ================= NAVBAR ================= -->

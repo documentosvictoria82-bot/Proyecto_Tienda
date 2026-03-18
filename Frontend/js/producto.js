@@ -234,8 +234,41 @@ function finalizarCompra(){
         return
     }
 
+    const modal = document.getElementById("modalCompra")
+    const resumen = document.getElementById("resumenCompra")
+    const totalHTML = document.getElementById("totalCompra")
+
+    resumen.innerHTML = ""
+
+    let total = 0
+
+    carrito.forEach(p => {
+        const subtotal = p.price * p.cantidad
+        total += subtotal
+
+        resumen.innerHTML += `
+            <div style="border-bottom:1px solid #ccc; margin-bottom:8px;">
+                <p><strong>${p.name}</strong></p>
+                <p>${p.cantidad} x $${p.price} = $${subtotal}</p>
+            </div>
+        `
+    })
+
+    totalHTML.textContent = `Total a pagar: $${total}`
+
+    modal.classList.add("activo")
+}
+
+function cerrarModal(){
+    document.getElementById("modalCompra").classList.remove("activo")
+}
+
+function confirmarCompra(){
+
+    cerrarModal()
+
     const toast = document.getElementById("toastCarrito")
-    toast.textContent = "Compra realizada con éxito 🎉"
+    toast.textContent = "🎉 Gracias por tu compra"
     toast.classList.add("mostrar")
 
     setTimeout(()=>{
