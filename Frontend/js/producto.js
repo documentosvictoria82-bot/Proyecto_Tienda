@@ -240,7 +240,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const linkRegistro = document.querySelector('a[href="./pages/registro.html"]')
 
 if(token){
-    btnCerrarSesion.classList.remove("d-none")
+    if(btnCerrarSesion){
+        btnCerrarSesion.classList.remove("d-none")
+    }
 
     if(linkLogin) linkLogin.style.display = "none"
     if(linkRegistro) linkRegistro.style.display = "none"
