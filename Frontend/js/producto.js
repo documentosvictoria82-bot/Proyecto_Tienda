@@ -239,23 +239,81 @@ document.addEventListener("DOMContentLoaded", () => {
     const linkLogin = document.querySelector('a[href="./pages/login.html"]')
     const linkRegistro = document.querySelector('a[href="./pages/registro.html"]')
 
-if(token){
-    if(btnCerrarSesion){
-        btnCerrarSesion.classList.remove("d-none")
+    if(token){
+        if(btnCerrarSesion){
+            btnCerrarSesion.classList.remove("d-none")
+        }
+
+        if(linkLogin) linkLogin.style.display = "none"
+        if(linkRegistro) linkRegistro.style.display = "none"
     }
 
-    if(linkLogin) linkLogin.style.display = "none"
-    if(linkRegistro) linkRegistro.style.display = "none"
-}
-
-    // CONEXIÓN DEL BOTÓN (LO IMPORTANTE)
     if(btnCerrarSesion){
         btnCerrarSesion.addEventListener("click", cerrarSesion)
     }
 
+    // 🔥 CARGA INICIAL
     obtenerProductos()
     actualizarContador()
     renderCarrito()
+
+    // ================= 🔥 CATEGORÍAS =================
+    const botonesCategoria = document.querySelectorAll(".categoria")
+
+    botonesCategoria.forEach(boton => {
+        boton.addEventListener("click", () => {
+            const categoria = boton.dataset.cat
+
+            if(categoria === "todos"){
+                mostrarProductos(todosLosProductos)
+            } else {
+                const filtrados = todosLosProductos.filter(p =>
+                    p.category?.toLowerCase() === categoria.toLowerCase()
+                )
+                mostrarProductos(filtrados)
+            }
+        })
+    })
+
+    // ================= 🔥 BUSCAR =================
+    const formBuscar = document.getElementById("formBuscar")
+    const inputBuscar = document.getElementById("inputBuscar")
+
+    if(formBuscar){
+        formBuscar.addEventListener("submit", (e) => {
+            e.preventDefault()
+
+            const texto = inputBuscar.value.toLowerCase()
+
+            const filtrados = todosLosProductos.filter(p =>
+                p.name.toLowerCase().includes(texto)
+            )
+
+            mostrarProductos(filtrados)
+        })
+    }
+
+    // ================= 🔥 ORDENAR =================
+    const ordenar = document.getElementById("ordenarPrecio")
+
+    if(ordenar){
+        ordenar.addEventListener("change", () => {
+            const valor = ordenar.value
+
+            let copia = [...todosLosProductos]
+
+            if(valor === "menor"){
+                copia.sort((a,b) => a.price - b.price)
+            }
+
+            if(valor === "mayor"){
+                copia.sort((a,b) => b.price - a.price)
+            }
+
+            mostrarProductos(copia)
+        })
+    }
+
 })
 
 //  ACCIONES CARRITO 
