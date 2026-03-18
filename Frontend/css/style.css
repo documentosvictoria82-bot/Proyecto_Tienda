@@ -502,3 +502,73 @@ body.dark-mode input[type="range"] {
 body, .card, .navbar, input, select {
     transition: all 0.3s ease;
 }
+
+/* ===== FONDO GLOBAL ===== */
+body.dark-mode,
+body.dark-mode html {
+    background-color: #121212 !important;
+}
+
+/* SECCIONES PRINCIPALES */
+body.dark-mode .container,
+body.dark-mode .container-fluid {
+    background-color: transparent !important;
+}
+
+/* TITULOS */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode label {
+    color: #ffffff !important;
+}
+
+/* CATEGORÍAS (BOTONES) */
+body.dark-mode .categoria {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+/* RANGE (BARRA DE PRECIO) */
+body.dark-mode input[type="range"] {
+    background: transparent;
+}
+
+/* TEXTO DE PRECIO */
+body.dark-mode #precioValor {
+    color: #fff;
+}
+
+/* FONDO GENERAL DETRÁS DE TODO */
+body.dark-mode {
+    background: linear-gradient(180deg, #121212 0%, #181818 100%);
+}
+
+/* NAVBAR (mejorado) */
+body.dark-mode .navbar {
+    background-color: #0f0f0f !important;
+}
+
+/* BOTONES CLAROS */
+body.dark-mode .btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+}
+
+/* SELECT (ordenar) */
+body.dark-mode select {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+/* TRANSICIÓN SUAVE GLOBAL */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
