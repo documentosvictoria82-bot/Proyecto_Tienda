@@ -283,6 +283,41 @@ totalHTML.innerHTML = `<hr><h5>Total: $${total}</h5>`
 lista.appendChild(totalHTML)
 }
 
+//  CONTROL DE SESIÓN PARA EL NAVBAR 
+function gestionarNavbar() {
+    const btnCerrar = document.getElementById("btnCerrarSesion");
+    const linkLogin = document.getElementById("linkLogin");
+    const linkRegistro = document.getElementById("linkRegistro");
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        // Si el usuario entró: mostramos "Cerrar Sesión" y ocultamos el resto
+        if (btnCerrar) btnCerrar.classList.remove("d-none");
+        if (linkLogin) linkLogin.classList.add("d-none");
+        if (linkRegistro) linkRegistro.classList.add("d-none");
+    } else {
+        // Si no hay nadie: mostramos login/registro y ocultamos cerrar sesión
+        if (btnCerrar) btnCerrar.classList.add("d-none");
+        if (linkLogin) linkLogin.classList.remove("d-none");
+        if (linkRegistro) linkRegistro.classList.remove("d-none");
+    }
+}
+
+// Configurar el botón de cerrar sesión
+const botonCerrar = document.getElementById("btnCerrarSesion");
+if (botonCerrar) {
+    botonCerrar.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        alert("Sesión cerrada");
+        window.location.href = "index.html"; // Redirige y refresca
+    });
+}
+
+// Ejecutamos la función apenas cargue el script
+gestionarNavbar();
+
 // GUARDAR
 function guardarCarrito(){
 localStorage.setItem("carrito",JSON.stringify(carrito))
