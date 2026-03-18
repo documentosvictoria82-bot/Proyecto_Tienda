@@ -340,6 +340,37 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+    // ================= ACCIONES CARRITO =================
+
+// Vaciar carrito
+function vaciarCarrito(){
+    carrito = []
+    guardarCarrito()
+    actualizarContador()
+    renderCarrito()
+}
+
+// Finalizar compra
+function finalizarCompra(){
+    if(carrito.length === 0){
+        alert("Tu carrito está vacío 🛒")
+        return
+    }
+
+const toast = document.getElementById("toastCarrito")
+toast.textContent = "Compra realizada con éxito 🎉"
+toast.classList.add("mostrar")
+
+setTimeout(()=>{
+    toast.classList.remove("mostrar")
+},2000)
+
+    carrito = []
+    guardarCarrito()
+    actualizarContador()
+    renderCarrito()
+}
+
     // INIT
     obtenerProductos()
     actualizarContador()
