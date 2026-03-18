@@ -18,10 +18,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container-fluid">
 
-<!-- LOGO -->
 <a class="navbar-brand" href="#">🛒 Mi Tienda Bootcamps</a>
 
-<!-- BUSCADOR -->
 <form class="d-flex me-3" id="formBuscar">
 <input 
 class="form-control me-2" 
@@ -29,40 +27,34 @@ type="search"
 placeholder="Buscar producto"
 id="inputBuscar">
 
-<button class="btn btn-outline-light">
+<button type="submit" class="btn btn-outline-light">
 Buscar
 </button>
 </form>
 
-<!-- ORDENAR -->
 <select id="ordenarPrecio" class="form-select w-auto me-3">
 <option value="">Ordenar</option>
 <option value="menor">Precio menor</option>
 <option value="mayor">Precio mayor</option>
 </select>
 
-<!-- DERECHA NAVBAR -->
 <div class="d-flex align-items-center gap-3">
 
-<!-- BOTÓN TEMA -->
 <button id="toggleTema" class="btn btn-outline-light">
 🌙
 </button>
 
-<!-- CARRITO -->
 <div class="carrito-icono text-white" onclick="toggleCarrito()" style="cursor:pointer;">
 🛒
 <span id="contadorCarrito" class="badge bg-danger">0</span>
 </div>
 
-<!-- LOGIN -->
-<a href="./pages/login.html" id="linkLogin" class="text-white text-decoration-none">Iniciar Sesión</a>
-<a href="./pages/registro.html" id="linkRegistro" class="text-white text-decoration-none">Registrarse</a>
+<a href="./pages/login.html" class="text-white text-decoration-none">Iniciar Sesión</a>
+<a href="./pages/registro.html" class="text-white text-decoration-none">Registrarse</a>
 
 <button id="btnCerrarSesion" class="btn btn-sm btn-danger d-none">Cerrar Sesión</button>
 
 </div>
-
 </div>
 </nav>
 
@@ -73,15 +65,13 @@ Buscar
 <h5>Categorías</h5>
 
 <div class="categorias">
-
-<button class="categoria" data-cat="todos">Todos</button>
-<button class="categoria" data-cat="portatiles">Portátiles</button>
-<button class="categoria" data-cat="moviles">Dispositivos Móviles</button>
-<button class="categoria" data-cat="accesorios">Accesorios</button>
-<button class="categoria" data-cat="audio">Audio y Video</button>
-<button class="categoria" data-cat="gaming">Gaming</button>
-<button class="categoria" data-cat="electrodomesticos">Electrodomésticos</button>
-
+<button type="button" class="categoria" data-cat="todos">Todos</button>
+<button type="button" class="categoria" data-cat="portatiles">Portátiles</button>
+<button type="button" class="categoria" data-cat="moviles">Dispositivos Móviles</button>
+<button type="button" class="categoria" data-cat="accesorios">Accesorios</button>
+<button type="button" class="categoria" data-cat="audio">Audio y Video</button>
+<button type="button" class="categoria" data-cat="gaming">Gaming</button>
+<button type="button" class="categoria" data-cat="electrodomesticos">Electrodomésticos</button>
 </div>
 
 <br>
@@ -106,9 +96,7 @@ class="form-range">
 
 <h2 class="text-center mb-4">Nuestros Productos</h2>
 
-<div id="productos" class="row g-4">
-<!-- Aquí JS carga los productos -->
-</div>
+<div id="productos" class="row g-4"></div>
 
 </div>
 
@@ -118,18 +106,20 @@ class="form-range">
 
 <div class="carrito-header d-flex justify-content-between align-items-center">
 <h4>🛒 Carrito</h4>
-<button class="btn btn-sm btn-dark" onclick="toggleCarrito()">✖</button>
+<button type="button" class="btn btn-sm btn-dark" onclick="toggleCarrito()">✖</button>
 </div>
 
 <div id="listaCarrito"></div>
 
 <button 
+type="button"
 class="btn btn-outline-dark w-100 mt-2"
 onclick="vaciarCarrito()">
 🗑 Vaciar carrito
 </button>
 
 <button 
+type="button"
 class="btn btn-dark w-100 mt-3"
 onclick="finalizarCompra()">
 Finalizar compra

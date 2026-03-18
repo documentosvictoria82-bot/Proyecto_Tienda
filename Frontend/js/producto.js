@@ -219,6 +219,36 @@ function renderCarrito(){
     lista.innerHTML += `<hr><h5>Total: $${total}</h5>`
 }
 
+// ================= ACCIONES CARRITO =================
+
+// ✅ AHORA SON GLOBALES (ARREGLADO)
+function vaciarCarrito(){
+    carrito = []
+    guardarCarrito()
+    actualizarContador()
+    renderCarrito()
+}
+
+function finalizarCompra(){
+    if(carrito.length === 0){
+        alert("Tu carrito está vacío 🛒")
+        return
+    }
+
+    const toast = document.getElementById("toastCarrito")
+    toast.textContent = "Compra realizada con éxito 🎉"
+    toast.classList.add("mostrar")
+
+    setTimeout(()=>{
+        toast.classList.remove("mostrar")
+    },2000)
+
+    carrito = []
+    guardarCarrito()
+    actualizarContador()
+    renderCarrito()
+}
+
 // ================= UTILIDADES =================
 function guardarCarrito(){
     localStorage.setItem("carrito", JSON.stringify(carrito))
@@ -242,7 +272,7 @@ function toggleDescripcion(btn){
 // ================= DOM READY =================
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ===== TEMA OSCURO =====
+    // ===== TEMA =====
     const botonTema = document.getElementById("toggleTema")
 
     if(botonTema){
@@ -264,13 +294,12 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // ===== FILTRO CATEGORÍAS =====
+    // ===== CATEGORÍAS =====
     const botonesCategorias = document.querySelectorAll(".categoria")
 
     botonesCategorias.forEach(btn => {
         btn.addEventListener("click", () => {
 
-            // estilo activo (PRO)
             botonesCategorias.forEach(b => b.classList.remove("activa"))
             btn.classList.add("activa")
 
@@ -282,7 +311,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const filtrados = todosLosProductos.filter(p => 
                     p.category && p.category.toLowerCase().includes(categoria.toLowerCase())
                 )
-
                 mostrarProductos(filtrados)
             }
         })
@@ -305,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // ===== ORDENAR =====
+    // ===== ORDEN =====
     const selectOrdenar = document.getElementById("ordenarPrecio")
 
     if(selectOrdenar){
@@ -324,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // ===== FILTRO PRECIO =====
+    // ===== PRECIO =====
     const filtroPrecio = document.getElementById("filtroPrecio")
     const precioValor = document.getElementById("precioValor")
 
@@ -339,37 +367,6 @@ document.addEventListener("DOMContentLoaded", () => {
             mostrarProductos(filtrados)
         })
     }
-
-    // ================= ACCIONES CARRITO =================
-
-// Vaciar carrito
-function vaciarCarrito(){
-    carrito = []
-    guardarCarrito()
-    actualizarContador()
-    renderCarrito()
-}
-
-// Finalizar compra
-function finalizarCompra(){
-    if(carrito.length === 0){
-        alert("Tu carrito está vacío 🛒")
-        return
-    }
-
-const toast = document.getElementById("toastCarrito")
-toast.textContent = "Compra realizada con éxito 🎉"
-toast.classList.add("mostrar")
-
-setTimeout(()=>{
-    toast.classList.remove("mostrar")
-},2000)
-
-    carrito = []
-    guardarCarrito()
-    actualizarContador()
-    renderCarrito()
-}
 
     // INIT
     obtenerProductos()
