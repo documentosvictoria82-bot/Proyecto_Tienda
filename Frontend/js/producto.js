@@ -220,90 +220,6 @@ function renderCarrito(){
     lista.innerHTML += `<hr><h5>Total: $${total}</h5>`
 }
 
-// ================= ACCIONES CARRITO =================
-function vaciarCarrito(){
-    carrito = []
-    guardarCarrito()
-    actualizarContador()
-    renderCarrito()
-}
-
-function finalizarCompra(){
-    if(carrito.length === 0){
-        alert("Tu carrito está vacío 🛒")
-        return
-    }
-
-    const modal = document.getElementById("modalCompra")
-    const resumen = document.getElementById("resumenCompra")
-    const totalHTML = document.getElementById("totalCompra")
-
-    resumen.innerHTML = ""
-
-    let total = 0
-
-    carrito.forEach(p => {
-        const subtotal = p.price * p.cantidad
-        total += subtotal
-
-        resumen.innerHTML += `
-            <div style="border-bottom:1px solid #ccc; margin-bottom:8px;">
-                <p><strong>${p.name}</strong></p>
-                <p>${p.cantidad} x $${p.price} = $${subtotal}</p>
-            </div>
-        `
-    })
-
-    totalHTML.textContent = `Total a pagar: $${total}`
-
-    modal.classList.add("activo")
-}
-
-function cerrarModal(){
-    document.getElementById("modalCompra").classList.remove("activo")
-}
-
-function confirmarCompra(){
-
-    cerrarModal()
-
-    const toast = document.getElementById("toastCarrito")
-    toast.textContent = "🎉 ¡Compra realizada con éxito! Gracias por tu compra"
-    toast.classList.add("mostrar")
-
-    setTimeout(()=>{
-        toast.classList.remove("mostrar")
-    },2000)
-
-    carrito = []
-    guardarCarrito()
-    actualizarContador()
-    renderCarrito()
-}
-
-// ================= UTILIDADES =================
-function guardarCarrito(){
-    localStorage.setItem("carrito", JSON.stringify(carrito))
-}
-
-function mostrarToast(){
-    const toast = document.getElementById("toastCarrito")
-
-    toast.textContent = "🛒 Producto agregado al carrito"
-
-    toast.classList.add("mostrar")
-
-    setTimeout(()=>{
-        toast.classList.remove("mostrar")
-    },2000)
-}
-
-function toggleDescripcion(btn){
-    const descripcion = btn.previousElementSibling
-    descripcion.classList.toggle("expandida")
-    btn.textContent = descripcion.classList.contains("expandida") ? "Ver menos" : "Ver más"
-}
-
 // ================= 🔐 SESIÓN =================
 function cerrarSesion(){
     localStorage.removeItem("token")
@@ -311,14 +227,12 @@ function cerrarSesion(){
     localStorage.removeItem("usuario")
 
     alert("Sesión cerrada")
-
     window.location.href = "/index.html"
 }
 
 // ================= DOM READY =================
 document.addEventListener("DOMContentLoaded", () => {
 
-    // 🔥 CONTROL DE SESIÓN
     const usuario = JSON.parse(localStorage.getItem("usuario"))
 
     const btnCerrarSesion = document.getElementById("btnCerrarSesion")
@@ -327,110 +241,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(usuario){
         btnCerrarSesion.classList.remove("d-none")
+
         if(linkLogin) linkLogin.style.display = "none"
         if(linkRegistro) linkRegistro.style.display = "none"
     }
 
-    const botonTema = document.getElementById("toggleTema")
-
-    if(botonTema){
-        if(localStorage.getItem("tema") === "oscuro"){
-            document.body.classList.add("dark-mode")
-            botonTema.textContent = "☀️"
-        }
-
-        botonTema.addEventListener("click", () => {
-            document.body.classList.toggle("dark-mode")
-
-            if(document.body.classList.contains("dark-mode")){
-                localStorage.setItem("tema","oscuro")
-                botonTema.textContent = "☀️"
-            }else{
-                localStorage.setItem("tema","claro")
-                botonTema.textContent = "🌙"
-            }
-        })
-    }
-
-    const botonesCategorias = document.querySelectorAll(".categoria")
-
-    botonesCategorias.forEach(btn => {
-        btn.addEventListener("click", () => {
-
-            botonesCategorias.forEach(b => b.classList.remove("activa"))
-            btn.classList.add("activa")
-
-            const categoria = btn.dataset.cat
-
-            if(categoria === "todos"){
-                mostrarProductos(todosLosProductos)
-            } else {
-                const filtrados = todosLosProductos.filter(p => 
-                    p.category && p.category.toLowerCase().includes(categoria.toLowerCase())
-                )
-                mostrarProductos(filtrados)
-            }
-        })
-    })
-
-    const formBuscar = document.getElementById("formBuscar")
-    const inputBuscar = document.getElementById("inputBuscar")
-
-    if(formBuscar){
-        formBuscar.addEventListener("submit",(e)=>{
-            e.preventDefault()
-            const texto = inputBuscar.value.toLowerCase()
-
-            const filtrados = todosLosProductos.filter(p =>
-                p.name.toLowerCase().includes(texto)
-            )
-
-            mostrarProductos(filtrados)
-        })
-    }
-
-    const selectOrdenar = document.getElementById("ordenarPrecio")
-
-    if(selectOrdenar){
-        selectOrdenar.addEventListener("change",()=>{
-            let productosOrdenados = [...todosLosProductos]
-
-            if(selectOrdenar.value === "menor"){
-                productosOrdenados.sort((a,b)=>a.price - b.price)
-            }
-
-            if(selectOrdenar.value === "mayor"){
-                productosOrdenados.sort((a,b)=>b.price - a.price)
-            }
-
-            mostrarProductos(productosOrdenados)
-        })
-    }
-
-    const filtroPrecio = document.getElementById("filtroPrecio")
-    const precioValor = document.getElementById("precioValor")
-
-    if(filtroPrecio && precioValor){
-        precioValor.innerText = filtroPrecio.value
-
-        filtroPrecio.addEventListener("input",()=>{
-            const max = Number(filtroPrecio.value)
-            precioValor.innerText = max
-
-            const filtrados = todosLosProductos.filter(p => p.price <= max)
-            mostrarProductos(filtrados)
-        })
+    // 🔥 CONEXIÓN DEL BOTÓN (LO IMPORTANTE)
+    if(btnCerrarSesion){
+        btnCerrarSesion.addEventListener("click", cerrarSesion)
     }
 
     obtenerProductos()
     actualizarContador()
     renderCarrito()
 })
-
-// ================= GLOBALES =================
-window.vaciarCarrito = vaciarCarrito
-window.finalizarCompra = finalizarCompra
-window.toggleCarrito = toggleCarrito
-window.cambiarCantidad = cambiarCantidad
-window.eliminarProductoCarrito = eliminarProductoCarrito
-window.cerrarSesion = cerrarSesion
