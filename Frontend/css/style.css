@@ -439,3 +439,66 @@ body.dark-mode {
 body.dark-mode .navbar {
     background-color: #1f1f1f !important;
 }
+
+/* ===== MODO OSCURO GLOBAL ===== */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* NAVBAR */
+body.dark-mode .navbar {
+    background-color: #1f1f1f !important;
+}
+
+/* CONTENEDORES */
+body.dark-mode .container {
+    background-color: transparent;
+}
+
+/* TARJETAS (PRODUCTOS) */
+body.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #333;
+}
+
+/* TEXTO DENTRO DE CARDS */
+body.dark-mode .card p,
+body.dark-mode .card h5 {
+    color: #ffffff;
+}
+
+/* BOTONES */
+body.dark-mode .btn-dark {
+    background-color: #333;
+    border-color: #333;
+}
+
+body.dark-mode .btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+}
+
+/* PANEL CARRITO */
+body.dark-mode .panel-carrito {
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+/* INPUTS Y SELECT */
+body.dark-mode input,
+body.dark-mode select {
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+/* RANGE (slider) */
+body.dark-mode input[type="range"] {
+    accent-color: #0d6efd;
+}
+
+body, .card, .navbar, input, select {
+    transition: all 0.3s ease;
+}
