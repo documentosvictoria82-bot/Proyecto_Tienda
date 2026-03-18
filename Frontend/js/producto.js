@@ -430,6 +430,28 @@ function toggleDescripcion(btn) {
     }
 }
 
+//Botón para escoger el tema de la pagina
+const botonTema = document.getElementById("toggleTema")
+
+// Cargar tema guardado
+if(localStorage.getItem("tema") === "oscuro"){
+    document.body.classList.add("dark-mode")
+}
+
+// Evento del botón
+botonTema.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode")
+
+    // Guardar preferencia
+    if(document.body.classList.contains("dark-mode")){
+        localStorage.setItem("tema", "oscuro")
+        botonTema.textContent = "☀️"
+    } else {
+        localStorage.setItem("tema", "claro")
+        botonTema.textContent = "🌙"
+    }
+})
+
 
 // INIT
 obtenerProductos()

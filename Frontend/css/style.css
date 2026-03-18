@@ -422,3 +422,20 @@ color:orange;
     color: #0d6efd;
     cursor: pointer;
 }
+
+/* MODO CLARO (por defecto) */
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* MODO OSCURO */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Ejemplo navbar */
+body.dark-mode .navbar {
+    background-color: #1f1f1f !important;
+}
