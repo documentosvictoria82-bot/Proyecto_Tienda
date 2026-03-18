@@ -594,10 +594,10 @@ body.dark-mode select {
 
     background: rgba(0,0,0,0.6);
 
-     display: flex;  /* ✅ siempre visible cuando se crea */
+    display: flex; /* ✅ CAMBIO CLAVE */
     justify-content: center;
     align-items: center;
-    z-index: 999;
+    z-index: 9999;
 }
 
 .modal-compra.activo {
