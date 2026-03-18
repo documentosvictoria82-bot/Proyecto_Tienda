@@ -286,7 +286,6 @@ function guardarCarrito(){
     localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
-// ✅ AQUÍ ESTÁ EL FIX
 function mostrarToast(){
     const toast = document.getElementById("toastCarrito")
 
@@ -305,8 +304,32 @@ function toggleDescripcion(btn){
     btn.textContent = descripcion.classList.contains("expandida") ? "Ver menos" : "Ver más"
 }
 
+// ================= 🔐 SESIÓN =================
+function cerrarSesion(){
+    localStorage.removeItem("token")
+    localStorage.removeItem("role")
+    localStorage.removeItem("usuario")
+
+    alert("Sesión cerrada")
+
+    window.location.href = "/index.html"
+}
+
 // ================= DOM READY =================
 document.addEventListener("DOMContentLoaded", () => {
+
+    // 🔥 CONTROL DE SESIÓN
+    const usuario = JSON.parse(localStorage.getItem("usuario"))
+
+    const btnCerrarSesion = document.getElementById("btnCerrarSesion")
+    const linkLogin = document.querySelector('a[href="./pages/login.html"]')
+    const linkRegistro = document.querySelector('a[href="./pages/registro.html"]')
+
+    if(usuario){
+        btnCerrarSesion.classList.remove("d-none")
+        if(linkLogin) linkLogin.style.display = "none"
+        if(linkRegistro) linkRegistro.style.display = "none"
+    }
 
     const botonTema = document.getElementById("toggleTema")
 
@@ -410,3 +433,4 @@ window.finalizarCompra = finalizarCompra
 window.toggleCarrito = toggleCarrito
 window.cambiarCantidad = cambiarCantidad
 window.eliminarProductoCarrito = eliminarProductoCarrito
+window.cerrarSesion = cerrarSesion
