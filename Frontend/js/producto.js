@@ -268,7 +268,7 @@ function confirmarCompra(){
     cerrarModal()
 
     const toast = document.getElementById("toastCarrito")
-    toast.textContent = "🎉 Gracias por tu compra"
+    toast.textContent = "🎉 ¡Compra realizada con éxito! Gracias por tu compra"
     toast.classList.add("mostrar")
 
     setTimeout(()=>{
@@ -286,8 +286,12 @@ function guardarCarrito(){
     localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
+// ✅ AQUÍ ESTÁ EL FIX
 function mostrarToast(){
     const toast = document.getElementById("toastCarrito")
+
+    toast.textContent = "🛒 Producto agregado al carrito"
+
     toast.classList.add("mostrar")
 
     setTimeout(()=>{
@@ -304,7 +308,6 @@ function toggleDescripcion(btn){
 // ================= DOM READY =================
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ===== TEMA =====
     const botonTema = document.getElementById("toggleTema")
 
     if(botonTema){
@@ -326,7 +329,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // ===== CATEGORÍAS =====
     const botonesCategorias = document.querySelectorAll(".categoria")
 
     botonesCategorias.forEach(btn => {
@@ -348,7 +350,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
 
-    // ===== BUSCADOR =====
     const formBuscar = document.getElementById("formBuscar")
     const inputBuscar = document.getElementById("inputBuscar")
 
@@ -365,7 +366,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // ===== ORDEN =====
     const selectOrdenar = document.getElementById("ordenarPrecio")
 
     if(selectOrdenar){
@@ -384,7 +384,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // ===== PRECIO =====
     const filtroPrecio = document.getElementById("filtroPrecio")
     const precioValor = document.getElementById("precioValor")
 
@@ -400,13 +399,12 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // INIT
     obtenerProductos()
     actualizarContador()
     renderCarrito()
 })
 
-// ================= HACER FUNCIONES GLOBALES =================
+// ================= GLOBALES =================
 window.vaciarCarrito = vaciarCarrito
 window.finalizarCompra = finalizarCompra
 window.toggleCarrito = toggleCarrito
