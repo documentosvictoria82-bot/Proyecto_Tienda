@@ -150,6 +150,7 @@ function cambiarCantidad(id,cambio){
     }
 
     guardarCarrito()
+    actualizarContador()
     renderCarrito()
 }
 
@@ -220,8 +221,6 @@ function renderCarrito(){
 }
 
 // ================= ACCIONES CARRITO =================
-
-// ✅ AHORA SON GLOBALES (ARREGLADO)
 function vaciarCarrito(){
     carrito = []
     guardarCarrito()
@@ -373,3 +372,10 @@ document.addEventListener("DOMContentLoaded", () => {
     actualizarContador()
     renderCarrito()
 })
+
+// ================= HACER FUNCIONES GLOBALES =================
+window.vaciarCarrito = vaciarCarrito
+window.finalizarCompra = finalizarCompra
+window.toggleCarrito = toggleCarrito
+window.cambiarCantidad = cambiarCantidad
+window.eliminarProductoCarrito = eliminarProductoCarrito
