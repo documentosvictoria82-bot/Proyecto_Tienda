@@ -272,12 +272,56 @@ function finalizarCompra(){
         return
     }
 
+    let total = 0
+    let detalle = ""
+
+    carrito.forEach(producto => {
+        const subtotal = producto.price * producto.cantidad
+        total += subtotal
+
+        detalle += `
+        <p>${producto.name}</p>
+        <p>${producto.cantidad} x $${producto.price} = $${subtotal}</p>
+        <hr>
+        `
+    })
+
+    const modalHTML = `
+    <div id="modalCompra" class="modal-compra">
+        <div class="modal-contenido">
+            <h4>🧾 Resumen de compra</h4>
+            ${detalle}
+            <h5>Total a pagar: $${total}</h5>
+
+            <button onclick="confirmarCompra()" class="btn btn-success">
+                Confirmar compra
+            </button>
+
+            <button onclick="cerrarModal()" class="btn btn-secondary">
+                Cancelar
+            </button>
+        </div>
+    </div>
+    `
+
+    document.body.insertAdjacentHTML("beforeend", modalHTML)
+}
+function cerrarModal(){
+    const modal = document.getElementById("modalCompra")
+    if(modal){
+        modal.remove()
+    }
+}
+
+function confirmarCompra(){
     alert("🎉 Gracias por tu compra")
 
     carrito = []
     guardarCarrito()
     actualizarContador()
     renderCarrito()
+
+    cerrarModal()
 }
 
 // ================= UTILIDADES =================
