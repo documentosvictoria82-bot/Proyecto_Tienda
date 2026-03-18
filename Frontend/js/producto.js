@@ -233,18 +233,18 @@ function cerrarSesion(){
 // ================= DOM READY =================
 document.addEventListener("DOMContentLoaded", () => {
 
-    const usuario = JSON.parse(localStorage.getItem("usuario"))
+    const token = localStorage.getItem("token")
 
     const btnCerrarSesion = document.getElementById("btnCerrarSesion")
     const linkLogin = document.querySelector('a[href="./pages/login.html"]')
     const linkRegistro = document.querySelector('a[href="./pages/registro.html"]')
 
-    if(usuario){
-        btnCerrarSesion.classList.remove("d-none")
+if(token){
+    btnCerrarSesion.classList.remove("d-none")
 
-        if(linkLogin) linkLogin.style.display = "none"
-        if(linkRegistro) linkRegistro.style.display = "none"
-    }
+    if(linkLogin) linkLogin.style.display = "none"
+    if(linkRegistro) linkRegistro.style.display = "none"
+}
 
     // 🔥 CONEXIÓN DEL BOTÓN (LO IMPORTANTE)
     if(btnCerrarSesion){
