@@ -99,7 +99,13 @@ card.innerHTML=`
 <div class="card-body d-flex flex-column">
 
 <h5 class="card-title">${producto.name}</h5>
-<p class="card-text">${producto.description || ""}</p>
+<p class="card-text descripcion">
+    ${producto.description || ""}
+</p>
+
+<button class="btn btn-link p-0 ver-mas" onclick="toggleDescripcion(this)">
+    Ver más
+</button>
 <p class="precio">$${producto.price}</p>
 
 <div class="rating">
@@ -412,6 +418,18 @@ Total: $${total}
     actualizarContador();
     renderCarrito();
 };
+
+function toggleDescripcion(btn) {
+    const descripcion = btn.previousElementSibling;
+
+    descripcion.classList.toggle("expandida");
+
+    if (descripcion.classList.contains("expandida")) {
+        btn.textContent = "Ver menos";
+    } else {
+        btn.textContent = "Ver más";
+    }
+}
 
 
 // INIT
