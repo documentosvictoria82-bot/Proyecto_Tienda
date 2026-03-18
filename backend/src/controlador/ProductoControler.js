@@ -71,14 +71,13 @@ const CrearUnProducto = async (req, res) => {
             stock,
             category,
 
-            // ❌ ANTES (LOCAL)
+            
             // image: req.file ? `/uploads/${req.file.filename}` : ""
 
-            // ✅ AHORA (CLOUDINARY)
-            image: req.file ? req.file.path : ""
+            image: req.file ? req.file.path : "" //cloudinary devuelve la URL completa, no solo el nombre del archivo
         });
 
-        console.log("ARCHIVO SUBIDO:", req.file); // 👈 DEBUG CLAVE
+        console.log("ARCHIVO SUBIDO:", req.file); // DEBUG CLAVE
         console.log("PRODUCTO A GUARDAR:", nuevoProducto);
 
         await nuevoProducto.save();
@@ -98,44 +97,44 @@ const CrearUnProducto = async (req, res) => {
 
 const calificarProducto = async (req, res) => {
 
-try{
+    try{
 
-const { id } = req.params
-const { rating } = req.body
+        const { id } = req.params
+        const { rating } = req.body
 
-const producto = await Product.findById(id)
+        const producto = await Product.findById(id)
 
-if(!producto){
-return res.status(404).json({mensaje:"Producto no encontrado"})
-}
+    if(!producto){
+        return res.status(404).json({mensaje:"Producto no encontrado"})
+    }
 
 // si no existe rating lo creamos
-if(!producto.rating){
-producto.rating = { rate:0, count:0 }
-}
+    if(!producto.rating){
+        producto.rating = { rate:0, count:0 }
+    }
 
 // calcular promedio
-const total = producto.rating.rate * producto.rating.count
+    const total = producto.rating.rate * producto.rating.count
 
-producto.rating.count += 1
-producto.rating.rate = (total + rating) / producto.rating.count
+        producto.rating.count += 1
+        producto.rating.rate = (total + rating) / producto.rating.count
 
-await producto.save()
+    await producto.save()
 
-res.json({
-mensaje:"Calificación guardada",
-producto
-})
+    res.json({
+    mensaje:"Calificación guardada",
+    producto
+    })
 
-}catch(error){
+    }catch(error){
 
-res.status(500).json({
-error:error.message
-})
+    res.status(500).json({
+    error:error.message
+    })
 
-}
+    }
 
-}
+    }
 
 // Modificar un producto
 const ModificarProducto = async (req, res) => {
@@ -154,30 +153,29 @@ const ModificarProducto = async (req, res) => {
 const datosActualizados = {};
 
 // solo agregar si vienen datos
-if (req.body.name) datosActualizados.name = req.body.name;
-if (req.body.description) datosActualizados.description = req.body.description;
-if (req.body.category) datosActualizados.category = req.body.category;
+    if (req.body.name) datosActualizados.name = req.body.name;
+    if (req.body.description) datosActualizados.description = req.body.description;
+    if (req.body.category) datosActualizados.category = req.body.category;
 
 // números seguros
-if (req.body.price !== undefined) {
+    if (req.body.price !== undefined) {
     datosActualizados.price = Number(req.body.price);
-}
+    }
 
-if (req.body.stock !== undefined) {
+    if (req.body.stock !== undefined) {
     datosActualizados.stock = Number(req.body.stock);
-}
+    }
 
 // imagen
-// ✅ seguro en Vercel
-if (req.file) {
-    datosActualizados.image = req.file.path;
-}
+// seguro en Vercel
+    if (req.file) {
+        datosActualizados.image = req.file.path;
+    }
 
-
-        const productoActualizado = await Product.findByIdAndUpdate(
-            id,
-            datosActualizados,
-            { new: true }
+    const productoActualizado = await Product.findByIdAndUpdate(
+        id,
+        datosActualizados,
+        { new: true }
         );
 
         res.status(200).json({
@@ -187,11 +185,11 @@ if (req.file) {
 
     } catch (error) {
 
-        console.error("ERROR REAL:", error); // 👈 déjalo para debug
+        console.error("ERROR REAL:", error); // déjalo para debug
 
         res.status(500).json({
             mensaje: "Error al actualizar el producto",
-            error: error.message // 👈 esto te ayuda mucho
+            error: error.message // esto te ayuda mucho
         });
 
     }
