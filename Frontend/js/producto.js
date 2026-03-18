@@ -314,6 +314,29 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+    const btnTema = document.getElementById("toggleTema")
+
+if(btnTema){
+    btnTema.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode")
+
+        // guardar preferencia
+        if(document.body.classList.contains("dark-mode")){
+            localStorage.setItem("tema", "oscuro")
+            btnTema.textContent = "☀️"
+        }else{
+            localStorage.setItem("tema", "claro")
+            btnTema.textContent = "🌙"
+        }
+    })
+}
+const temaGuardado = localStorage.getItem("tema")
+
+if(temaGuardado === "oscuro"){
+    document.body.classList.add("dark-mode")
+    if(btnTema) btnTema.textContent = "☀️"
+}
+
 })
 
 //  ACCIONES CARRITO 

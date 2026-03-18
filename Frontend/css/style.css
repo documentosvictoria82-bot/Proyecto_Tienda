@@ -617,3 +617,25 @@ body.dark-mode .modal-contenido {
     background: #1e1e1e;
     color: white;
 }
+
+.dark-mode{
+    background-color: #121212;
+    color: white;
+}
+
+/* tarjetas */
+.dark-mode .card{
+    background-color: #1e1e1e;
+    color: white;
+}
+
+/* navbar */
+.dark-mode .navbar{
+    background-color: #000 !important;
+}
+
+/* carrito */
+.dark-mode .panel-carrito{
+    background-color: #1e1e1e;
+    color: white;
+}
