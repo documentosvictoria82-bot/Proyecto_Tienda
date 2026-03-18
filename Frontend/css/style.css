@@ -594,7 +594,7 @@ body.dark-mode select {
 
     background: rgba(0,0,0,0.6);
 
-    display: none;
+     display: flex;  /* ✅ siempre visible cuando se crea */
     justify-content: center;
     align-items: center;
     z-index: 999;
