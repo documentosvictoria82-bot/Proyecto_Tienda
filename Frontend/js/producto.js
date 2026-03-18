@@ -272,6 +272,11 @@ function finalizarCompra(){
         return
     }
 
+    const existente = document.getElementById("modalCompra")
+if(existente){
+    existente.remove()
+}
+
     let total = 0
     let detalle = ""
 
@@ -285,6 +290,8 @@ function finalizarCompra(){
         <hr>
         `
     })
+
+    
 
     const modalHTML = `
     <div id="modalCompra" class="modal-compra">
