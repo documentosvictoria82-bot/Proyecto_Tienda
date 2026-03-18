@@ -5,277 +5,277 @@ let todosLosProductos = []
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []
 
 // GENERAR ESTRELLAS
-function generarEstrellas(rating){
-let estrellas = ""
+    function generarEstrellas(rating){
+        let estrellas = ""
 const redondeado = Math.round(rating)
 
-for(let i = 1; i <= 5; i++){
-if(i <= redondeado){
-estrellas += "⭐"
-}else{
-estrellas += "☆"
-}
-}
-return estrellas
-}
+    for(let i = 1; i <= 5; i++){
+        if(i <= redondeado){
+            estrellas += "⭐"
+        }else{
+            estrellas += "☆"
+        }
+     }
+        return estrellas
+    }
 
 function generarEstrellasInteractivo(idProducto, ratingActual){
-let estrellas = ""
-const rating = Math.round(ratingActual)
+    let estrellas = ""
+        const rating = Math.round(ratingActual)
 
-for(let i = 1; i <= 5; i++){
-const activa = i <= rating ? "estrella-activa" : ""
+    for(let i = 1; i <= 5; i++){
+        const activa = i <= rating ? "estrella-activa" : ""
 
-estrellas += `
-<span 
-class="estrella ${activa}" 
-onclick="calificarProducto('${idProducto}',${i})">
-★
-</span>
-`
-}
-return estrellas
-}
+    estrellas += `
+         <span 
+             class="estrella ${activa}" 
+             onclick="calificarProducto('${idProducto}',${i})">
+             ★
+        </span>
+                `
+        }
+        return estrellas
+        }
 
 async function calificarProducto(id, valor){
-try{
-await fetch(`${API}/${id}/rating`,{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body: JSON.stringify({rating:valor})
-})
-obtenerProductos()
-}catch(error){
-console.log("Error calificando producto:", error)
-}
-}
+    try{
+        await fetch(`${API}/${id}/rating`,{
+        method:"POST",
+        headers:{
+        "Content-Type":"application/json"
+        },
+    body: JSON.stringify({rating:valor})
+        })
+        obtenerProductos()
+    }catch(error){
+        console.log("Error calificando producto:", error)
+     }
+    }
 
 // OBTENER PRODUCTOS
 async function obtenerProductos(){
-try{
-const response = await fetch(API)
-const data = await response.json()
+    try{
+        const response = await fetch(API)
+        const data = await response.json()
 
-if(!Array.isArray(data)){
-console.log("Error del backend:", data)
-return
-}
+    if(!Array.isArray(data)){
+        console.log("Error del backend:", data)
+    return
+    }
 
-todosLosProductos = data
-mostrarProductos(data)
+    todosLosProductos = data
+    mostrarProductos(data)
 
-}catch(error){
-console.log("Error cargando productos:", error)
-}
-}
+    }catch(error){
+        console.log("Error cargando productos:", error)
+        }
+    }
 
 // MOSTRAR PRODUCTOS
 function mostrarProductos(productos){
 
-const contenedor = document.getElementById("productos")
-if(!contenedor) return
+    const contenedor = document.getElementById("productos")
+        if(!contenedor) return
 
-contenedor.innerHTML=""
+    contenedor.innerHTML=""
 
-productos.forEach(producto=>{
+    productos.forEach(producto=>{
 
-// ✅ Imagen compatible con Cloudinary
-const imagen = producto.image
-  ? producto.image.startsWith("http")
-    ? producto.image
-    : "https://proyecto-tienda-rho.vercel.app" + producto.image
-  : "https://via.placeholder.com/300";
+// Imagen compatible con Cloudinary
+    const imagen = producto.image
+        ? producto.image.startsWith("http")
+        ? producto.image
+        : "https://proyecto-tienda-rho.vercel.app" + producto.image
+        : "https://via.placeholder.com/300";
 
-const card = document.createElement("div")
-card.classList.add("col-md-4","col-lg-3")
+    const card = document.createElement("div")
+        card.classList.add("col-md-4","col-lg-3")
 
-card.innerHTML=`
-<div class="card card-producto h-100">
+        card.innerHTML=`
+        <div class="card card-producto h-100">
 
-<img src="${imagen}" class="card-img-top">
+        <img src="${imagen}" class="card-img-top">
 
-<div class="card-body d-flex flex-column">
+            <div class="card-body d-flex flex-column">
 
-<h5 class="card-title">${producto.name}</h5>
-<p class="card-text descripcion">
-    ${producto.description || ""}
-</p>
+                <h5 class="card-title">${producto.name}</h5>
+                <p class="card-text descripcion">
+                ${producto.description || ""}
+                </p>
 
-<button class="btn btn-link p-0 ver-mas" onclick="toggleDescripcion(this)">
-    Ver más
-</button>
-<p class="precio">$${producto.price}</p>
+                <button class="btn btn-link p-0 ver-mas" onclick="toggleDescripcion(this)">
+                Ver más
+                </button>
+            <p class="precio">$${producto.price}</p>
 
-<div class="rating">
-${generarEstrellasInteractivo(producto._id, producto.rating?.rate || 0)}
-</div>
+                <div class="rating">
+                    ${generarEstrellasInteractivo(producto._id, producto.rating?.rate || 0)}
+                </div>
 
-<p class="stock">Stock: ${producto.stock}</p>
+            <p class="stock">Stock: ${producto.stock}</p>
 
-<button 
-class="btn btn-dark btn-comprar mt-auto"
-onclick="agregarCarrito('${producto._id}')">
-Agregar al carrito
-</button>
+            <button 
+            class="btn btn-dark btn-comprar mt-auto"
+                onclick="agregarCarrito('${producto._id}')">
+                    Agregar al carrito
+            </button>
 
-</div>
-</div>
-`
+        </div>
+    </div>
+    `
 contenedor.appendChild(card)
-})
+    })
 }
 
 // BUSCADOR
-document.addEventListener("DOMContentLoaded", ()=>{
-const formBuscar = document.getElementById("formBuscar")
-const inputBuscar = document.getElementById("inputBuscar")
+    document.addEventListener("DOMContentLoaded", ()=>{
+        const formBuscar = document.getElementById("formBuscar")
+        const inputBuscar = document.getElementById("inputBuscar")
 
-if(formBuscar){
-formBuscar.addEventListener("submit",(e)=>{
-e.preventDefault()
-const texto = inputBuscar.value.toLowerCase()
+    if(formBuscar){
+        formBuscar.addEventListener("submit",(e)=>{
+        e.preventDefault()
+    const texto = inputBuscar.value.toLowerCase()
 
 const filtrados = todosLosProductos.filter(producto =>
-producto.name.toLowerCase().includes(texto)
-)
+    producto.name.toLowerCase().includes(texto)
+        )
 
 mostrarProductos(filtrados)
-})
+    })
 }
 
 if(inputBuscar){
-inputBuscar.addEventListener("input",()=>{
-const texto = inputBuscar.value.toLowerCase()
+    inputBuscar.addEventListener("input",()=>{
+        const texto = inputBuscar.value.toLowerCase()
 
 const filtrados = todosLosProductos.filter(producto =>
-producto.name.toLowerCase().includes(texto)
-)
+    producto.name.toLowerCase().includes(texto)
+    )
 
 mostrarProductos(filtrados)
-})
-}
-})
+    })
+    }
+    })
 
 // FILTRO CATEGORÍA
 document.addEventListener("DOMContentLoaded", () => {
-const botonesCategorias = document.querySelectorAll(".categoria")
+    const botonesCategorias = document.querySelectorAll(".categoria")
 
 botonesCategorias.forEach(btn => {
-btn.addEventListener("click", () => {
+    btn.addEventListener("click", () => {
 
-const categoria = btn.dataset.cat
+    const categoria = btn.dataset.cat
 
-if(categoria === "todos"){
-mostrarProductos(todosLosProductos)
-}else{
-const filtrados = todosLosProductos.filter(p => 
-p.category && p.category.toLowerCase() === categoria.toLowerCase()
-)
-mostrarProductos(filtrados)
-}
-})
-})
+    if(categoria === "todos"){
+        mostrarProductos(todosLosProductos)
+    }else{
+        const filtrados = todosLosProductos.filter(p => 
+        p.category && p.category.toLowerCase() === categoria.toLowerCase()
+    )
+        mostrarProductos(filtrados)
+            }
+        })
+    })
 })
 
 // CARRITO
 function agregarCarrito(id){
-const producto = todosLosProductos.find(p=>p._id === id)
-const existe = carrito.find(p=>p._id === id)
+    const producto = todosLosProductos.find(p=>p._id === id)
+    const existe = carrito.find(p=>p._id === id)
 
-if(existe){
-existe.cantidad += 1
-}else{
-carrito.push({...producto, cantidad:1})
-}
+        if(existe){
+            existe.cantidad += 1
+        }else{
+            carrito.push({...producto, cantidad:1})
+                }
 
-guardarCarrito()
-actualizarContador()
-renderCarrito()
-mostrarToast()
+    guardarCarrito()
+    actualizarContador()
+    renderCarrito()
+    mostrarToast()
 }
 
 function eliminarProductoCarrito(id){
-carrito = carrito.filter(p => p._id !== id)
-guardarCarrito()
-actualizarContador()
-renderCarrito()
+        carrito = carrito.filter(p => p._id !== id)
+    guardarCarrito()
+    actualizarContador()
+    renderCarrito()
 }
 
 function cambiarCantidad(id,cambio){
-const producto = carrito.find(p=>p._id === id)
-producto.cantidad += cambio
+        const producto = carrito.find(p=>p._id === id)
+            producto.cantidad += cambio
 
-if(producto.cantidad <= 0){
-eliminarProductoCarrito(id)
-return
-}
+        if(producto.cantidad <= 0){
+            eliminarProductoCarrito(id)
+        return
+    }
 
-guardarCarrito()
-renderCarrito()
+    guardarCarrito()
+    renderCarrito()
 }
 
 function actualizarContador(){
-const contador = document.getElementById("contadorCarrito")
-if(!contador) return
+        const contador = document.getElementById("contadorCarrito")
+    if(!contador) return
 
-const total = carrito.reduce((acc,p)=> acc + p.cantidad,0)
-contador.innerText = total
+        const total = carrito.reduce((acc,p)=> acc + p.cantidad,0)
+        contador.innerText = total
 }
 
 function toggleCarrito(){
-const panel = document.getElementById("panelCarrito")
-panel.classList.toggle("abierto")
-renderCarrito()
+        const panel = document.getElementById("panelCarrito")
+         panel.classList.toggle("abierto")
+        renderCarrito()
 }
 
 // RENDER CARRITO
 function renderCarrito(){
 
 const lista = document.getElementById("listaCarrito")
-if(!lista) return
+    if(!lista) return
 
-lista.innerHTML = ""
+        lista.innerHTML = ""
 let total = 0
 
-if(carrito.length === 0){
-lista.innerHTML = `<p class="carrito-vacio">Tu carrito está vacío 🛒</p>`
-return
+    if(carrito.length === 0){
+        lista.innerHTML = `<p class="carrito-vacio">Tu carrito está vacío 🛒</p>`
+    return
 }
 
 carrito.forEach(producto => {
 
-const div = document.createElement("div")
-div.classList.add("item-carrito")
+        const div = document.createElement("div")
+            div.classList.add("item-carrito")
 
-const imagen = producto.image
-  ? producto.image.startsWith("http")
-    ? producto.image
-    : "https://proyecto-tienda-rho.vercel.app" + producto.image
-  : "https://via.placeholder.com/300";
+        const imagen = producto.image
+        ? producto.image.startsWith("http")
+        ? producto.image
+            : "https://proyecto-tienda-rho.vercel.app" + producto.image
+            : "https://via.placeholder.com/300";
 
-const subtotal = producto.price * producto.cantidad
-total += subtotal
+        const subtotal = producto.price * producto.cantidad
+            total += subtotal
 
-div.innerHTML = `
-<div class="carrito-producto">
+    div.innerHTML = `
+        <div class="carrito-producto">
 
-<img src="${imagen}" class="carrito-img">
+            <img src="${imagen}" class="carrito-img">
 
-<div class="carrito-info">
-<p class="carrito-nombre">${producto.name}</p>
-<p class="carrito-precio">$${producto.price}</p>
+            <div class="carrito-info">
+                <p class="carrito-nombre">${producto.name}</p>
+                <p class="carrito-precio">$${producto.price}</p>
 
-<div class="controles-cantidad">
-<button onclick="cambiarCantidad('${producto._id}',-1)">-</button>
-<span>${producto.cantidad}</span>
-<button onclick="cambiarCantidad('${producto._id}',1)">+</button>
-</div>
+            <div class="controles-cantidad">
+                <button onclick="cambiarCantidad('${producto._id}',-1)">-</button>
+                <span>${producto.cantidad}</span>
+                <button onclick="cambiarCantidad('${producto._id}',1)">+</button>
+            </div>
 
-<button onclick="eliminarProductoCarrito('${producto._id}')">
-🗑 Eliminar
-</button>
+        <button onclick="eliminarProductoCarrito('${producto._id}')">
+        🗑 Eliminar
+         </button>
 
 </div>
 </div>
